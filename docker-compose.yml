@@ -1,0 +1,55 @@
+version: '3.9'
+services:
+  # --------------------- Local Infrastractures ---------------------
+  postgres:
+    image: postgres:15
+    container_name: next-admin_postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./infra/postgres/sql/:/docker-entrypoint-initdb.d/
+      - postgres-data:/var/lib/postgres
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "admin"
+      LANG: ja_JP.utf8
+      POSTGRES_INITDB_ARGS: "--locale-provider=icu --icu-locale=ja_JP"
+    networks:
+      - next-admin-network
+
+  localstack:
+    image: localstack/localstack
+    container_name: next-admin_localstack
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"  # external services port range
+    environment:
+      - DEBUG=${DEBUG-}
+      - PERSISTENCE=${PERSISTENCE-}
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - localstack-volume:/var/lib/localstack
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - next-admin-network
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    platform: linux/amd64
+    container_name: next-admin_mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - next-admin-network
+
+volumes:
+  postgres-data:
+    external: false
+  localstack-volume:
+    external: false
+
+networks:
+  next-admin-network:
+    driver: bridge

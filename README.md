@@ -1,0 +1,3 @@
+# admin application template
+
+wip

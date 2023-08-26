@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "apps/admin",
+    "packages/*"
+  ],
+  "scripts": {
+    "admin:echo": "(cd apps/admin/ && make echo)",
+    "admin:dev": "yarn workspace admin dev",
+    "admin:build": "yarn workspace @next-admin/db generate && yarn workspace admin build",
+    "admin:start": "yarn workspace admin start",
+    "db:deploy": "yarn workspace @next-admin/db deploy",
+    "db:generate": "yarn workspace @next-admin/db generate",
+    "db:studio": "yarn workspace @next-admin/db studio",
+    "ncu": "yarn workspace admin ncu && yarn workspace @next-admin/db ncu",
+    "ncuu": "yarn workspace admin ncuu && yarn workspace @next-admin/db ncuu",
+    "ncum": "yarn workspace admin ncum && yarn workspace @next-admin/db ncum",
+    "ncumu": "yarn workspace admin ncumu && yarn workspace @next-admin/db ncumu"
+  }
+}

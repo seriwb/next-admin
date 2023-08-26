@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    },
+    {
+      "path": "apps/web"
+    },
+    {
+      "path": "apps/admin"
+    },
+    {
+      "path": "packages/db"
+    },
+  ],
+  "settings": {
+    "files.exclude": {
+      "apps": true,
+      "packages": true,
+    }
+  }
+}
