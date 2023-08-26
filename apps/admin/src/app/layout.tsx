@@ -4,6 +4,7 @@ import React from 'react';
 import '@/styles/globals.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { SessionProvider } from 'next-auth/react';
 import { Toaster } from 'react-hot-toast';
 import { Layout } from '@/layouts/default';
 import { TrpcProvider } from '@/providers/trpc-provider';
@@ -47,7 +48,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <TrpcProvider>{children}</TrpcProvider>
+        <SessionProvider>
+          <TrpcProvider>{children}</TrpcProvider>
+        </SessionProvider>
         <div>
           <Toaster />
         </div>

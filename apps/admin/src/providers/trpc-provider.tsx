@@ -17,7 +17,7 @@ export const TrpcProvider = (props: Props) => {
       }),
   )
 
-  const url = process.env.NEXT_PUBLIC_TOOL_HOST! + '/api/trpc/'
+  const url = process.env.NEXT_PUBLIC_HOST! + '/api/trpc/'
 
   const [trpcClient] = useState(() =>
     trpc.createClient({

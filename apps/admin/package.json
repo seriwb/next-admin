@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.400.0",
+    "@aws-sdk/client-ses": "3.398.0",
     "@prisma/client": "5.2.0",
     "@react-email/components": "0.0.7",
     "@react-email/render": "0.0.7",
@@ -112,6 +113,6 @@
     "stylelint": "15.10.3",
     "stylelint-config-prettier": "9.0.5",
     "stylelint-prettier": "4.0.2",
-    "typescript": "5.2.2"
+    "typescript": "5.1.6"
   }
 }
