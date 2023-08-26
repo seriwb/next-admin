@@ -1,0 +1,63 @@
+name: "CI"
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled]
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    if: (github.event.action == 'labeled' && github.event.label.name == 'ci') || (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ci'))
+    outputs:
+      web: ${{ steps.filter.outputs.web }}
+      admin: ${{ steps.filter.outputs.admin }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          web:
+            - 'apps/web/**'
+          admin:
+            - 'apps/admin/**'
+
+  # web:
+  #   needs: changes
+  #   if: ${{ needs.changes.outputs.web == 'true' }}
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: .
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Use Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "20.5.0"
+  #         cache: 'yarn'
+  #         cache-dependency-path: yarn.lock
+  #     - name: Install dependencies
+  #       run: yarn install --prefer-offline
+  #     - name: Build
+  #       run: yarn web:build
+
+  admin:
+    needs: changes
+    if: ${{ needs.changes.outputs.admin == 'true' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.5.0"
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+      - name: Install dependencies
+        run: yarn install --prefer-offline
+      - name: Build
+        run: yarn admin:build
