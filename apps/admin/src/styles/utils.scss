@@ -1,0 +1,27 @@
+$breakpoints: (
+  "sm": 320px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+);
+
+$mainPanelColor: #1d1d1d;
+$menuColor: #121212;
+
+@mixin mq($size) {
+  @media screen and (max-width: #{map-get($breakpoints, $size)}) {
+    @content;
+  }
+}
+
+@mixin sp {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media screen and (min-width: 769px) {
+    @content;
+  }
+}
