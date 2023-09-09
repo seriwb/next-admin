@@ -1,0 +1,61 @@
+@use 'styles/utils';
+
+.container {
+  width: 400px;
+  background-color: #fff;
+  padding: 1rem 2rem 2rem 2rem;
+  @include utils.sp {
+    width: 90%;
+    margin: 1rem auto 0;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.error {
+  margin: 1rem 0;
+  .message {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.25rem;
+  }
+}
+
+.form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  @include utils.sp {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 0;
+  }
+}
+
+.login {
+  width: 130px;
+}
+
+.box {
+  padding-top: 1.5rem;
+  @include utils.sp {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.forget {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 19px;
+  color: utils.$accentColor;
+  &:hover {
+    color: utils.$subColor;
+  }
+}
