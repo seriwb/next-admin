@@ -12,8 +12,6 @@ services:
     environment:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "admin"
-      LANG: ja_JP.utf8
-      POSTGRES_INITDB_ARGS: "--locale-provider=icu --icu-locale=ja_JP"
     networks:
       - next-admin-network
 
