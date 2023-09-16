@@ -1,10 +1,10 @@
 //----- for API -----
 
 // SWR fetch error
-export interface FetchError<T> extends Error {
+export type FetchError<T> = {
   response: Response;
   data: T;
-}
+} & Error
 
 export type OffsetPaginator<T> = {
   rows: T[];

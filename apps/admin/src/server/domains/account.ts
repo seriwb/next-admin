@@ -1,6 +1,6 @@
 import { Prisma, Account } from '@prisma/client';
-import { OffsetPaginator } from '@/types/api';
 import { LoginUser } from '@/features/auth';
+import { OffsetPaginator } from '@/types/api';
 import {
   Condition,
   countActiveAccounts,

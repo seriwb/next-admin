@@ -6,10 +6,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { SessionProvider } from 'next-auth/react';
 import { Toaster } from 'react-hot-toast';
+import { TITLE } from '@/constants/application';
 import { TrpcProvider } from '@/providers/trpc-provider';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'simplebar-react/dist/simplebar.min.css';
-import { TITLE } from '@/constants/application';
 
 export default function RootLayout({
   // Layouts must accept a children prop.
