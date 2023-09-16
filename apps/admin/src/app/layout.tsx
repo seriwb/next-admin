@@ -10,6 +10,7 @@ import { Layout } from '@/layouts/default';
 import { TrpcProvider } from '@/providers/trpc-provider';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'simplebar-react/dist/simplebar.min.css';
+import { TITLE } from '@/constants/application';
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -18,9 +19,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const defaultTitle = ``; // TODO
-  const defaultDescription = ''; // TODO
-  const copyright = ''; // TODO
+  const defaultTitle = TITLE;
+  const defaultDescription = 'This is a sample application.'; // TODO
+  const copyright = 'your copyright'; // TODO
 
   return (
     <html lang='ja'>

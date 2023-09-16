@@ -1,12 +1,12 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { login } from '@/server/domains/user';
+import { login } from '@/server/domains/account';
 import { LoginUser } from '@/types/data';
 require('@/libs/prisma');
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   // https://next-auth.js.org/configuration/providers
   providers: [
     CredentialsProvider({
@@ -31,7 +31,10 @@ export const authOptions: NextAuthOptions = {
                 id: loginUser.id,
                 email: loginUser.email,
                 status: loginUser.status,
+                privilege: loginUser.privilege,
                 caution: loginUser.caution,
+                name: loginUser.name,
+                image: loginUser.image,
               };
               return user;
             } else {
@@ -104,6 +107,7 @@ export const authOptions: NextAuthOptions = {
     // async redirect({ url, baseUrl }) { return baseUrl },
     async session({ session, token, user }) {
       session.user.status = (token.user as LoginUser).status;
+      session.user.privilege = (token.user as LoginUser).privilege;
       session.user.caution = (token.user as LoginUser).caution;
       return session;
     },
@@ -129,4 +133,6 @@ export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV !== 'production',
 };
 
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };

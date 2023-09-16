@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
-import { FormFeedback } from '@/components/ui/forms/form-feedback';
-import { InputTextField } from '@/components/ui/forms/input-text-field';
+import { FormFeedback } from '@/components/forms/form-feedback';
+import { InputTextField } from '@/components/forms/input-text-field';
 import ss from './text-input.module.scss';
 
 export type Validate = {

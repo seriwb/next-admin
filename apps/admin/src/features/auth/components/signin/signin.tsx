@@ -1,10 +1,13 @@
+'use client';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/buttons';
-import { TextInput } from '@/components/ui/forms';
+import { Button } from '@/components/buttons';
+import { TextInput } from '@/components/forms';
+import { ErrorMessages } from '@/features/auth';
 import { LoginUser } from '@/types/data';
 import ss from './signin.module.scss';
 
@@ -42,13 +45,7 @@ export const SignIn = ({ user }: Props) => {
     }
   });
 
-  const errorMessages: { [key: string]: string } = {
-    Signin: 'Try signing in with a different account.',
-    Callback: 'Try signing in with a different account.',
-    CredentialsSignin: 'Sign in failed. Check the details you provided are correct.',
-    default: 'Unable to sign in.',
-  };
-  const error = errorType && (errorMessages[errorType] ?? errorMessages.default);
+  const error = errorType && (ErrorMessages[errorType] ?? ErrorMessages.default);
 
   return (
     <div className={ss.container}>

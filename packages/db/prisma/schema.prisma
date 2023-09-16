@@ -18,8 +18,9 @@ model Account {
   password  String   @db.Text()
   status    String   @db.Text()
   privilege String   @db.Text()
+  caution   String?  @db.Text() // suspended reason
   name      String?  @db.Text()
-  picture   String?  @db.Text()
+  image     String?  @db.Text()
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamp()
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamp()
 
@@ -35,7 +36,7 @@ model User {
   status    String   @db.Text()
   caution   String?  @db.Text() // suspended reason
   name      String?  @db.Text()
-  picture   String?  @db.Text()
+  image     String?  @db.Text()
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamp()
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamp()
 

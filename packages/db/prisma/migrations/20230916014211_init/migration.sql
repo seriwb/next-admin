@@ -5,8 +5,9 @@ CREATE TABLE "account" (
     "password" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "privilege" TEXT NOT NULL,
+    "caution" TEXT,
     "name" TEXT,
-    "picture" TEXT,
+    "image" TEXT,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
 
@@ -22,7 +23,7 @@ CREATE TABLE "user" (
     "status" TEXT NOT NULL,
     "caution" TEXT,
     "name" TEXT,
-    "picture" TEXT,
+    "image" TEXT,
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL,
 

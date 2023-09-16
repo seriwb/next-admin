@@ -12,7 +12,7 @@ export default function SigninLayout({ children }: { children: React.ReactNode }
   return (
     <>
       <head>
-        <title>{`Sign In | ${TITLE}`}</title>
+        <title>{`Register account | ${TITLE}`}</title>
       </head>
       {children}
     </>

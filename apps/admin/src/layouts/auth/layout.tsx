@@ -6,10 +6,9 @@ import { ProtectedView } from './protected-view';
 
 type Props = {
   children: React.ReactNode;
-  title?: string;
 };
 
-export const Layout = ({ children, title }: Props) => {
+export const Layout = ({ children }: Props) => {
   return (
     <ProtectedView>
       <div className={ss.content}>
