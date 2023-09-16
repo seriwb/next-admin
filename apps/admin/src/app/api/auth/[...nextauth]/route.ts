@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { login } from '@/server/domains/account';
-import { LoginUser } from '@/types/data';
+import { LoginUser } from '@/features/auth';
 require('@/libs/prisma');
 
 // For more information on each option (and a full list of options) go to

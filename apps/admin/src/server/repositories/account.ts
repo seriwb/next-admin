@@ -1,7 +1,7 @@
 import { Prisma, Account } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 import prisma from '@/libs/prisma';
-import { LoginUser } from '@/types/data';
+import { LoginUser } from '@/features/auth';
 
 const saltRounds = 10;
 

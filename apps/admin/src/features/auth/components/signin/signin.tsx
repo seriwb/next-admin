@@ -7,8 +7,7 @@ import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/buttons';
 import { TextInput } from '@/components/forms';
-import { ErrorMessages } from '@/features/auth';
-import { LoginUser } from '@/types/data';
+import { ErrorMessages, LoginUser } from '@/features/auth';
 import ss from './signin.module.scss';
 
 type SignInForm = {
