@@ -1,4 +1,6 @@
-import { NextAuthOptions } from 'next-auth';
+import "server-only";
+
+import { NextAuthOptions, getServerSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { LoginUser } from '@/features/auth';
 import { login } from '@/server/domains/account';
@@ -132,3 +134,5 @@ export const authOptions: NextAuthOptions = {
   // Enable debug messages in the console if you are having problems
   debug: process.env.NODE_ENV !== 'production',
 };
+
+export const getAppSession = () => getServerSession(authOptions);
