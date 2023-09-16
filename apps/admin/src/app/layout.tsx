@@ -6,7 +6,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { SessionProvider } from 'next-auth/react';
 import { Toaster } from 'react-hot-toast';
-import { Layout } from '@/layouts/default';
 import { TrpcProvider } from '@/providers/trpc-provider';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'simplebar-react/dist/simplebar.min.css';

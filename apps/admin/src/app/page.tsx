@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { TITLE } from '@/constants/application';
 import { Layout } from '@/layouts/auth';
 import SigninPage from './auth/signin/page';
 
