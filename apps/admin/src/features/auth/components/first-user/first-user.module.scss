@@ -1,0 +1,50 @@
+@use 'styles/utils';
+
+.container {
+  width: 400px;
+  background-color: #fff;
+  padding: 1rem 2rem 2rem 2rem;
+  @include utils.sp {
+    width: 90%;
+    margin: 1rem auto 0;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  @include utils.sp {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 0;
+  }
+}
+
+.error {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: utils.$invalidColor;
+}
+
+.register {
+  margin-top: 1.5rem;
+  @include utils.sp {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .button {
+    width: 130px;
+  }
+}

@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+// Admin account
+model Account {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.Text()
+  password  String   @db.Text()
+  status    String   @db.Text()
+  privilege String   @db.Text()
+  caution   String?  @db.Text() // suspended reason
+  name      String?  @db.Text()
+  image     String?  @db.Text()
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamp()
+
+  @@map("account")
+}
+
+// Service user
+model User {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @db.Text()
+  email     String   @unique @db.Text()
+  password  String   @db.Text()
+  status    String   @db.Text()
+  caution   String?  @db.Text() // suspended reason
+  name      String?  @db.Text()
+  image     String?  @db.Text()
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamp()
+
+  @@map("user")
+}
+
+model Article {
+  id          Int       @id @default(autoincrement())
+  uuid        String    @unique @db.Text()
+  status      String    @default("draft") @db.Text()
+  title       String    @default("") @db.Text()
+  description String?   @db.Text()
+  publishedAt DateTime? @map("published_at") @db.Timestamp()
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamp()
+
+  @@map("article")
+}
+
+// log

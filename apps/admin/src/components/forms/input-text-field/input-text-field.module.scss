@@ -1,0 +1,53 @@
+@use 'styles/utils';
+
+.container {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+}
+
+.input {
+  padding: 0 14px;
+  width: 100%;
+  height: 54px;
+  font-size: 1rem;
+  display: block;
+  width: 100%;
+  transition: border 0.3s linear;
+  border: 1px solid #000;
+  border-radius: 2px;
+
+  &[type='password'] {
+    font-family: Verdana;
+    letter-spacing: 0.125em;
+    &::placeholder {
+      font-family: 'Noto Sans JP';
+      letter-spacing: 0.5px;
+    }
+  }
+  &::placeholder {
+    font-size: 1rem;
+  }
+
+  &[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1rem;
+    width: 1rem;
+    background-image: url('/static/images/icon_close.png');
+    background-size: contain;
+    cursor: pointer;
+  }
+}
+
+.readonly {
+  color: #000;
+  background: #fafafa;
+}
+
+.valid {
+  border-color: utils.$validColor;
+}
+
+.invalid {
+  border-color: utils.$invalidColor;
+}

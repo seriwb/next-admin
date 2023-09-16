@@ -8,7 +8,7 @@ declare module "next-auth" {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   export interface Session {
     user: {
-      status: string; // アクセス拒否チェック用
+      status: string;
     } & DefaultSession["user"]
   }
 }

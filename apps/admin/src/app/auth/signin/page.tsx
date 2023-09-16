@@ -1,7 +1,9 @@
-"use client";
+'use client';
+
+import { SignIn } from '@/features/auth';
 
 const SigninPage = () => {
-  return <>todo</>;
+  return <SignIn />;
 };
 
 export default SigninPage;

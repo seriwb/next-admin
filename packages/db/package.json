@@ -2,14 +2,11 @@
   "name": "@next-admin/db",
   "version": "0.1.0",
   "private": true,
-  "main": "src/index.ts",
-  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsc",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "yarn lint --fix",
     "dev": "prisma migrate dev",
@@ -22,29 +19,29 @@
     "deploy": "prisma migrate deploy",
     "resolve": "prisma migrate resolve",
     "status": "prisma migrate status",
-    "ncu": "ncu",
-    "ncuu": "ncu -u",
-    "ncum": "ncu --target minor",
-    "ncumu": "ncu --target minor -u"
+    "ncu": "ncu -x typescript",
+    "ncuu": "ncu -u -x typescript",
+    "ncum": "ncu --target minor -x typescript",
+    "ncumu": "ncu --target minor -u -x typescript"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "5.2.0",
-    "prisma": "5.2.0"
+    "@prisma/client": "5.3.1",
+    "prisma": "5.3.1"
   },
   "devDependencies": {
-    "@types/node": "20.5.6",
-    "@typescript-eslint/eslint-plugin": "6.4.1",
-    "@typescript-eslint/parser": "6.4.1",
-    "eslint": "8.48.0",
+    "@types/node": "20.6.1",
+    "@typescript-eslint/eslint-plugin": "6.7.0",
+    "@typescript-eslint/parser": "6.7.0",
+    "eslint": "8.49.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-prettier": "5.0.0",
     "eslint-plugin-react": "7.33.2",
     "import-sort-parser-typescript": "6.0.0",
-    "npm-check-updates": "16.13.1",
-    "prettier": "3.0.2",
+    "npm-check-updates": "16.14.3",
+    "prettier": "3.0.3",
     "ts-node": "10.9.1",
     "typescript": "5.1.6"
   }

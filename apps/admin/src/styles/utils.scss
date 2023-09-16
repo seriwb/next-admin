@@ -1,0 +1,33 @@
+$breakpoints: (
+  'sm': 320px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
+
+$baseColor: #e8f9fd;
+$mainColor: #79dae8;
+$subColor: #0aa1dd;
+$accentColor: #2155cd;
+$validColor: #2eb85c;
+$invalidColor: #e55353;
+
+$menuColor: #121212;
+
+@mixin mq($size) {
+  @media screen and (max-width: #{map-get($breakpoints, $size)}) {
+    @content;
+  }
+}
+
+@mixin sp {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media screen and (min-width: 769px) {
+    @content;
+  }
+}
