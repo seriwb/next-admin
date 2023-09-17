@@ -73,6 +73,10 @@ export const FirstUser = () => {
     if (ret.isLoading) {
       return;
     }
+    if (ret.error) {
+      console.error(ret.error);
+      router.push('/');
+    }
     if (ret.data?.existed) {
       router.push('/');
     } else {

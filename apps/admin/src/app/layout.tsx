@@ -1,15 +1,22 @@
-'use client';
-
-import React from 'react';
 import '@/styles/globals.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { SessionProvider } from 'next-auth/react';
-import { Toaster } from 'react-hot-toast';
-import { TITLE } from '@/constants/application';
-import { TrpcProvider } from '@/providers/trpc-provider';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'simplebar-react/dist/simplebar.min.css';
+import React from 'react';
+import { Metadata } from 'next';
+import { Toaster } from 'react-hot-toast';
+import { TITLE } from '@/constants/application';
+import { NextAuthProvider } from '@/providers/auth-provider';
+import { TrpcProvider } from '@/providers/trpc-provider';
+
+export const metadata: Metadata = {
+  title: {
+    default: TITLE,
+    template: `%s | ${TITLE}`,
+  },
+  description: 'This is a sample application.', // TODO
+};
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -18,15 +25,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const defaultTitle = TITLE;
-  const defaultDescription = 'This is a sample application.'; // TODO
   const copyright = 'your copyright'; // TODO
 
   return (
     <html lang='ja'>
       <head>
-        <title>{defaultTitle}</title>
-        <meta name='description' content={defaultDescription} />
         <meta name='copyright' content={copyright} />
         {/* <link
           rel='canonical'
@@ -48,9 +51,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <SessionProvider>
+        <NextAuthProvider>
           <TrpcProvider>{children}</TrpcProvider>
-        </SessionProvider>
+        </NextAuthProvider>
         <div>
           <Toaster />
         </div>
