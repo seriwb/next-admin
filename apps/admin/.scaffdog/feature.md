@@ -11,13 +11,14 @@ questions:
 # `{{ inputs.feature }}/components/{{ inputs.name }}/index.ts`
 
 ```typescript
-export * from "./{{ inputs.name }}";
+export * from './{{ inputs.name }}';
 ```
 
 # `{{ inputs.feature }}/components/{{ inputs.name }}/{{ inputs.name }}.tsx`
 
 ```typescript
-import ss from "./{{ inputs.name }}.module.scss";
+import { clsx } from 'clsx';
+import ss from './{{ inputs.name }}.module.scss';
 
 type Props = {
 };
@@ -33,7 +34,7 @@ export const {{ inputs.name | pascal }} = (props: Props) => {
 # `{{ inputs.feature }}/components/{{ inputs.name }}/{{ inputs.name }}.module.scss`
 
 ```css
-@use "styles/utils";
+@use 'styles/utils';
 
 .container {
 }
@@ -42,12 +43,12 @@ export const {{ inputs.name | pascal }} = (props: Props) => {
 # `{{ inputs.feature }}/components/{{ inputs.name }}/{{ inputs.name }}.stories.tsx`
 
 ```typescript
-import { {{ inputs.name | pascal }} } from "./{{ inputs.name }}";
-import { Meta, StoryFn } from "@storybook/react";
-// import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { Meta, StoryFn } from '@storybook/react';
+import { {{ inputs.name | pascal }} } from './index';
+// import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 export default {
-  title: "Features/xxx/ComponentName",
+  title: 'Features/xxx/ComponentName',
   component: {{ inputs.name | pascal }},
 } as Meta<typeof {{ inputs.name | pascal }}>;
 
@@ -59,14 +60,14 @@ const Template: StoryFn<typeof {{ inputs.name | pascal }}> = (args) => (
 // const mockData = [
 //   {
 //     url: `/api/xxxxxx`,
-//     method: "POST",
+//     method: 'POST',
 //     status: 200,
 //     response: [],
 //   },
 // ];
 
 export const Sample1 = Template.bind({});
-Sample1.storyName = "sample 1";
+Sample1.storyName = 'sample 1';
 Sample1.args = {
 };
 Sample1.parameters = {
@@ -75,10 +76,10 @@ Sample1.parameters = {
   },
   // mockData,
   // TODO: SP view sample
-  // layout: "fullscreen",
+  // layout: 'fullscreen',
   // viewport: {
   //   viewports: INITIAL_VIEWPORTS,
-  //   defaultViewport: "iphonese2",
+  //   defaultViewport: 'iphonese2',
   // },
 };
 ```

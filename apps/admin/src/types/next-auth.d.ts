@@ -9,6 +9,7 @@ declare module "next-auth" {
   export interface Session {
     user: {
       status: string;
+      privilege: string;
     } & DefaultSession["user"]
   }
 }

@@ -3,7 +3,7 @@ import { Button } from './button';
 import type { Meta, StoryFn } from '@storybook/react';
 
 export default {
-  title: 'Components/ui/buttons/button',
+  title: 'Components/buttons/button',
   component: Button,
 } as Meta<typeof Button>;
 
