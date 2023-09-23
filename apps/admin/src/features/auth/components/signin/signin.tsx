@@ -79,7 +79,7 @@ export const SignIn = ({ user }: Props) => {
         {error && <p>{error}</p>}
         <div className={ss.box}>
           <div className={ss.login}>
-            <Button label='login' loading={isSubmitting} onClick={signInSubmit} />
+            <Button label='sign in' loading={isSubmitting} onClick={signInSubmit} />
           </div>
         </div>
       </form>

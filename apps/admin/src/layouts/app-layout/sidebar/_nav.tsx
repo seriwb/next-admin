@@ -1,4 +1,7 @@
 import { PersonLinesFill, Speedometer2 } from 'react-bootstrap-icons';
+import { ACCOUNT_PRIVILEGE } from '@/constants/application';
+
+type Privilege = keyof typeof ACCOUNT_PRIVILEGE;
 
 export type Navigation = {
   component: 'title' | 'item' | 'group';
@@ -6,9 +9,10 @@ export type Navigation = {
   to?: string;
   icon?: React.ReactElement;
   items?: Navigation[];
-  privilege?: string;
+  privilege?: Privilege;
 };
 
+// if you add it here, please edit the breadcrumb component as well.
 const _nav: Navigation[] = [
   {
     component: 'item',
