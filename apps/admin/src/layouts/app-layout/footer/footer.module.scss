@@ -1,0 +1,15 @@
+@use 'styles/utils';
+
+.container {
+  width: 100%;
+  text-align: end;
+  position: fixed;
+  bottom: 0;
+  right: 1rem;
+  padding: 1rem;
+}
+
+.copyright {
+  margin-left: 1rem;
+  color: #6e6e6e;
+}

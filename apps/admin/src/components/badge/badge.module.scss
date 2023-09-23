@@ -1,0 +1,18 @@
+@use 'styles/utils';
+
+.container {
+  padding: 0.5rem 1rem;
+  width: fit-content;
+}
+
+.info {
+  background-color: utils.$subColor;
+  color: #fff;
+}
+
+.round {
+  border-radius: 80px;
+}
+.square {
+  border-radius: 5px;
+}

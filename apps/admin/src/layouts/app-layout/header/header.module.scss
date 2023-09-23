@@ -1,0 +1,78 @@
+@use 'styles/utils';
+
+$spacing: 0.5rem;
+$font-color: #7b7b7b;
+$border-color: #d8dbe0;
+
+.container {
+  padding: $spacing;
+  background-color: #fefefe;
+  position: sticky;
+  top: 0;
+  z-index: 1029;
+  border-bottom: 1px solid $border-color;
+}
+
+.nav {
+  height: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+
+  .navLeft {
+  }
+  .navRight {
+    margin-right: 4rem;
+  }
+}
+
+.dropdownIcon {
+  --var-color: #7b7b7b;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--var-color);
+  border: 2px solid var(--var-color);
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dropdownMenu {
+  width: 240px;
+  padding: 0.5rem 1rem;
+  color: $font-color;
+  .title {
+    margin-top: 0;
+    color: inherit;
+  }
+  .menu {
+    color: inherit;
+
+    .item {
+      width: calc(100% + 1rem);
+      height: 100%;
+      margin-left: -$spacing;
+      padding: calc($spacing / 2) $spacing;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      &:hover {
+        background-color: #dfecff;
+      }
+    }
+    .divider {
+      margin: 0.5rem -1rem;
+      border-top: 1px solid $border-color;
+    }
+  }
+}
+
+.divider {
+  margin: $spacing calc($spacing * -1);
+  border-top: 1px solid $border-color;
+}
+
+.breadcrumb {
+}

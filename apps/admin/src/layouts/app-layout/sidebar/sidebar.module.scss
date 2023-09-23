@@ -1,0 +1,45 @@
+@use 'styles/utils';
+
+.container {
+  width: 260px;
+  height: 100vh;
+  padding: 1rem 0;
+  background-color: utils.$accentColor;
+  div {
+    color: #fff;
+  }
+}
+
+.brand {
+  padding: 0.5rem 1rem 1rem 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.nav {
+  width: 100%;
+  border-top: 1px solid #fff;
+}
+
+.navList {
+  margin-top: 1rem;
+}
+
+.navLink {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.active {
+  background-color: rgba($color: utils.$mainColor, $alpha: 0.4);
+}
+.title {
+  margin-top: 1rem;
+}
+.selected {
+  &:hover {
+    background-color: rgba($color: utils.$mainColor, $alpha: 0.4);
+  }
+}

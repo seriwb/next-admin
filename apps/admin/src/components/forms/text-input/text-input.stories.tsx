@@ -3,7 +3,7 @@ import { TextInput } from "./index";
 import type { Meta, StoryFn } from "@storybook/react";
 
 export default {
-  title: "Components/ui/forms/text-input",
+  title: "Components/forms/text-input",
   component: TextInput,
   decorators: [(story) => <div style={{ width: "400px" }}>{story()}</div>],
 } as Meta<typeof TextInput>;

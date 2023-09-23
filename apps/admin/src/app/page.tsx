@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { Layout } from '@/layouts/auth';
+import { AuthLayout } from '@/layouts/auth-layout';
 import SigninPage from './auth/signin/page';
 
 const DEFAULT_VIEW = '/dashboard';
@@ -31,9 +31,9 @@ const Page = () => {
 
   if (!isUser || !activated) {
     return (
-      <Layout>
+      <AuthLayout>
         <SigninPage />
-      </Layout>
+      </AuthLayout>
     );
   }
 

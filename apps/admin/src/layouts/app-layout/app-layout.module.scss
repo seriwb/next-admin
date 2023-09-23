@@ -1,0 +1,10 @@
+@use 'styles/utils';
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.contents {
+  flex: 1 0 auto;
+}

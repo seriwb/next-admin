@@ -1,0 +1,22 @@
+.dropdown {
+  position: absolute;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+.menu {
+  position: absolute;
+  width: fit-content;
+  z-index: 10;
+  background-color: #fff;
+  border: 1px solid #d8dbe0;
+  border-radius: 5px;
+}
+.left {
+  left: 0;
+}
+.right {
+  right: 0;
+}
