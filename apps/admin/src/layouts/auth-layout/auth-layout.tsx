@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { APP_NAME } from '@/constants/application';
-import ss from './layout.module.scss';
+import ss from './auth-layout.module.scss';
 import { ProtectedView } from './protected-view';
 
 type Props = {

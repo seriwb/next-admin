@@ -1,13 +1,13 @@
 import { SignIn } from '@/features/auth/components/signin';
-import { Layout } from './index';
+import { AuthLayout } from './index';
 import type { Meta, StoryFn } from '@storybook/react';
 
 export default {
   title: 'Layouts/auth',
-  component: Layout,
-} as Meta<typeof Layout>;
+  component: AuthLayout,
+} as Meta<typeof AuthLayout>;
 
-const Template: StoryFn<typeof Layout> = (args) => <Layout {...args} />;
+const Template: StoryFn<typeof AuthLayout> = (args) => <AuthLayout {...args} />;
 
 export const Sample1 = Template.bind({});
 Sample1.storyName = 'default';
