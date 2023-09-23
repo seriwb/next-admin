@@ -12,7 +12,7 @@ $accentColor: #2155cd;
 $validColor: #2eb85c;
 $invalidColor: #e55353;
 
-$menuColor: #121212;
+$menuColor: #7b7b7b;
 
 @mixin mq($size) {
   @media screen and (max-width: #{map-get($breakpoints, $size)}) {
