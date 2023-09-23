@@ -1,7 +1,5 @@
 import { PersonLinesFill, Speedometer2 } from 'react-bootstrap-icons';
-import { ACCOUNT_PRIVILEGE } from '@/constants/application';
-
-type Privilege = keyof typeof ACCOUNT_PRIVILEGE;
+import { Privilege } from '@/types/application';
 
 export type Navigation = {
   component: 'title' | 'item' | 'group';
