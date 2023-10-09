@@ -59,7 +59,7 @@ $border-color: #d8dbe0;
       gap: 0.5rem;
       cursor: pointer;
       &:hover {
-        background-color: #dfecff;
+        background-color: utils.$selectColor;
       }
     }
     .divider {

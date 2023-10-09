@@ -3,6 +3,7 @@
 .container {
   width: 400px;
   background-color: #fff;
+  border: 1px solid #d8dbe0;
   padding: 1rem 2rem 2rem 2rem;
   @include utils.sp {
     width: 90%;
