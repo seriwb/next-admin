@@ -2,7 +2,6 @@ import { Account } from '@prisma/client';
 import { z } from 'zod';
 import { AccountSummary } from '@/features/accounts/types';
 import { OffsetPaginator } from '@/types/api';
-import { Privilege } from '@/types/application';
 import { checkActiveAccountExist, createNewAccount, getAccountList } from '../domains/account';
 import { protectedProcedure, publicProcedure, router } from '../router';
 
@@ -28,23 +27,14 @@ export const accountRouter = router({
         email: z.string().optional(),
         name: z.string().optional(),
         sort: z.string().optional(),
-        page: z.number(),
-        perPage: z.number(),
+        page: z.number().int().positive(),
+        perPage: z.number().int().positive(),
       }),
     )
-    .output(
-      z.array(
-        z.object({
-          id: z.number(),
-          email: z.string(),
-          name: z.string().nullable(),
-          privilege: z.custom<Privilege>(),
-        }),
-      ),
-    )
+    .output(z.custom<OffsetPaginator<AccountSummary>>())
     .query(async ({ input }) => {
       const limit = input.perPage;
-      const offset = limit * input.page;
+      const offset = limit * (input.page - 1);
       const result: OffsetPaginator<AccountSummary> = await getAccountList({
         email: input.email,
         name: input.name,
@@ -52,7 +42,6 @@ export const accountRouter = router({
         limit: limit,
         offset: offset,
       });
-      const summary = result.rows || [];
-      return summary;
+      return result;
     }),
 });

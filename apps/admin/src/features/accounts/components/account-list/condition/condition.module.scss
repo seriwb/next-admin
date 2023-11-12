@@ -1,0 +1,12 @@
+@use 'styles/utils';
+
+.container {
+  width: 100%;
+  display: inline-flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.search {
+  width: 300px;
+}

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { protectedProcedure, router } from "../router";
 
-export const userRouter = router({
+export const articleRouter = router({
   // TODO
 });

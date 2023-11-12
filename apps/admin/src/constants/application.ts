@@ -8,3 +8,5 @@ export const ACCOUNT_PRIVILEGE = {
   Admin: 'Admin',
   SuperAdmin: 'SuperAdmin',
 };
+
+export const PER_PAGE = 20;

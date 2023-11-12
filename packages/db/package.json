@@ -28,19 +28,19 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "5.3.1",
-    "prisma": "5.3.1"
+    "@prisma/client": "5.5.2",
+    "prisma": "5.5.2"
   },
   "devDependencies": {
-    "@types/node": "20.8.0",
-    "@typescript-eslint/eslint-plugin": "6.7.3",
-    "@typescript-eslint/parser": "6.7.3",
-    "eslint": "8.50.0",
+    "@types/node": "20.8.9",
+    "@typescript-eslint/eslint-plugin": "6.9.0",
+    "@typescript-eslint/parser": "6.9.0",
+    "eslint": "8.52.0",
     "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-react": "7.33.2",
     "import-sort-parser-typescript": "6.0.0",
-    "npm-check-updates": "16.14.4",
+    "npm-check-updates": "16.14.6",
     "prettier": "3.0.3",
     "ts-node": "10.9.1",
     "typescript": "5.1.6"
