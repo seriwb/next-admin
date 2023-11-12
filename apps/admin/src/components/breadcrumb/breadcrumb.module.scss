@@ -1,0 +1,14 @@
+@use 'styles/utils';
+
+.container {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.separator {
+  color: utils.$subColor;
+}
+
+.item {
+  color: utils.$menuColor;
+}

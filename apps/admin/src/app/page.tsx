@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { AuthLayout } from '@/layouts/auth-layout';
-import SigninPage from './auth/signin/page';
+import SigninPage from './(auth)/signin/page';
 
 const DEFAULT_VIEW = '/dashboard';
 

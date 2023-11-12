@@ -1,0 +1,27 @@
+@use 'styles/utils';
+
+.container {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 20px;
+  color: utils.$menuColor;
+}
+
+.search {
+  padding: 0 14px;
+  width: 100%;
+  height: 3rem;
+  font-size: 1rem;
+  display: block;
+  width: 100%;
+  transition: border 0.3s linear;
+  border: 1px solid utils.$borderColor;
+  border-radius: 4px;
+}
