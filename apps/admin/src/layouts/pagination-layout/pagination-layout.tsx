@@ -45,7 +45,6 @@ export const PaginationLayout = function <T>(props: Props<T>) {
   // }, [page]);
 
   // useEffect(() => {
-  //   console.log(`飛ぶか！？${pathname}?${query}`);
   //   router.push(`${pathname}?${query}`);
   // }, [pathname, query, router]);
 

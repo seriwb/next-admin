@@ -42,8 +42,10 @@ export const getAccountById = async (id: number): Promise<Account | null> => {
 export const getAccountCount = async (condition: AccountListCondition): Promise<number> => {
   const filter = {
     where: {
-      email: condition.email && { search: `${condition.email}*` },
-      name: condition.name && { search: `${condition.name}*` },
+      OR: [
+        { email: { startsWith: `%${condition.email}` } },
+        { name: { startsWith: `%${condition.name}` } }
+      ]
     },
   };
   const result = await prisma.account.count(filter);
@@ -52,10 +54,13 @@ export const getAccountCount = async (condition: AccountListCondition): Promise<
 
 export const getAccounts = async (condition: AccountListCondition): Promise<Account[]> => {
   let query = {};
+
   query = {
     where: {
-      email: condition.email && { search: `${condition.email}*` },
-      name: condition.name && { search: `${condition.name}*` },
+      OR: [
+        { email: { startsWith: `%${condition.email}` } },
+        { name: { startsWith: `%${condition.name}` } }
+      ]
     },
   };
 

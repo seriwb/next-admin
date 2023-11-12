@@ -24,8 +24,7 @@ export const accountRouter = router({
   list: protectedProcedure
     .input(
       z.object({
-        email: z.string().optional(),
-        name: z.string().optional(),
+        query: z.string().optional(),
         sort: z.string().optional(),
         page: z.number().int().positive(),
         perPage: z.number().int().positive(),
@@ -36,8 +35,8 @@ export const accountRouter = router({
       const limit = input.perPage;
       const offset = limit * (input.page - 1);
       const result: OffsetPaginator<AccountSummary> = await getAccountList({
-        email: input.email,
-        name: input.name,
+        email: input.query,
+        name: input.query,
         orderBy: input.sort,
         limit: limit,
         offset: offset,

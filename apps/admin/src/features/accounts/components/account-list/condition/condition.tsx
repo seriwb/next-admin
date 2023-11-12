@@ -1,24 +1,22 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import { clsx } from 'clsx';
+import { Dispatch, SetStateAction } from 'react';
 import { SearchText } from '@/components/search-text';
 import { SelectField } from '@/components/select-field';
 import ss from './condition.module.scss';
 
 type Props = {
-  query: URLSearchParams;
-  setQuery: Dispatch<SetStateAction<URLSearchParams>>;
+  query: string;
+  setQuery: Dispatch<SetStateAction<string>>;
+  sort: string;
+  setSort: Dispatch<SetStateAction<string>>;
 };
 
 export const Condition = (props: Props) => {
-  const [name, setName] = useState(props.query.get('query'));
-  const [sort, setSort] = useState(props.query.get('sort'));
-
   return (
     <div className={ss.container}>
       <div className={ss.search}>
-        <SearchText value={name} setValue={setName} placeholder='Search for account name...' />
+        <SearchText value={props.query} setValue={props.setQuery} placeholder='Search for account...' />
       </div>
-      <SelectField options={[]} value={sort} setValue={setSort} />
+      <SelectField options={[]} value={props.sort} setValue={props.setSort} />
     </div>
   );
 };
