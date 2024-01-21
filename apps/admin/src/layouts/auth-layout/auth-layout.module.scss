@@ -3,18 +3,18 @@
 .content {
   height: 100vh;
   display: flex;
-
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 19px;
-  background-color: utils.$baseColor;
+  background-color: utils.$lightColor;
 
   @include utils.pc {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
   }
+
   @include utils.sp {
     flex-direction: column;
     align-items: center;
@@ -23,7 +23,7 @@
 }
 
 .logo {
-  font-family: 'Montserrat';
+  font-family: Montserrat;
   font-weight: 800;
   font-size: 2rem;
   line-height: 2.5rem;
@@ -32,6 +32,7 @@
   @include utils.pc {
     margin: 0 100px;
   }
+
   @include utils.sp {
     margin-top: 50px;
   }
@@ -47,6 +48,7 @@
   @include utils.pc {
     margin-right: 100px;
   }
+
   @include utils.sp {
     width: 100%;
   }

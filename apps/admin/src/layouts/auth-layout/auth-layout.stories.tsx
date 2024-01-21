@@ -1,3 +1,4 @@
+import { SessionProvider } from 'next-auth/react';
 import { SignIn } from '@/features/auth/components/signin';
 import { AuthLayout } from './index';
 import type { Meta, StoryFn } from '@storybook/react';
@@ -7,8 +8,11 @@ export default {
   component: AuthLayout,
 } as Meta<typeof AuthLayout>;
 
-const Template: StoryFn<typeof AuthLayout> = (args) => <AuthLayout {...args} />;
-
+const Template: StoryFn<typeof AuthLayout> = (args) => (
+  <SessionProvider>
+    <AuthLayout {...args} />
+  </SessionProvider>
+);
 export const Sample1 = Template.bind({});
 Sample1.storyName = 'default';
 Sample1.args = {

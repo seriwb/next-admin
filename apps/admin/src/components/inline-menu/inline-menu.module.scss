@@ -1,0 +1,19 @@
+@use 'styles/utils';
+
+.dropdownIcon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  color: utils.$subColor;
+  border: 2px solid utils.$subColor;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    color: utils.$baseColor;
+    background-color: utils.$subColor;
+  }
+}

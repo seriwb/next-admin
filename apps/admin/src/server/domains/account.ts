@@ -1,8 +1,10 @@
 import { Prisma, Account } from '@prisma/client';
+import { AccountSummary } from '@/features/accounts';
 import { LoginUser } from '@/features/auth';
 import { OffsetPaginator } from '@/types/api';
+import { Privilege } from '@/types/application';
 import {
-  Condition,
+  AccountListCondition,
   countActiveAccounts,
   createAccount,
   deleteOneAccount,
@@ -29,26 +31,24 @@ export const getAccount = async (id: number): Promise<Account | null> => {
   return result;
 };
 
-export const getAccountList = async (
-  email?: string,
-  orderBy?: string,
-  limit?: number,
-  offset?: number,
-): Promise<OffsetPaginator<Account>> => {
-  const condition: Condition = {};
-  email && (condition.email = email);
-
+export const getAccountList = async (condition: AccountListCondition): Promise<OffsetPaginator<AccountSummary>> => {
   const total: number = await getAccountCount(condition);
-  const users = await getAccounts(condition, orderBy, limit, offset);
-  const nextOffset = (offset || 0) + (limit || 20);
+  const accounts = await getAccounts(condition);
+  const nextOffset = (condition.offset ?? 0) + (condition.limit ?? 20);
 
-  return { rows: users, offset: nextOffset, total: total };
+  const ret: AccountSummary[] = accounts.map((account) => ({
+    id: account.id,
+    email: account.email,
+    name: account.name,
+    privilege: account.privilege as Privilege,
+  }));
+  return { rows: ret, offset: nextOffset, total: total };
 };
 
 export const createNewAccount = async (
   username: string,
   password: string,
-  privilege: string,
+  privilege: Privilege,
   name?: string,
 ): Promise<Account> => {
   const newOne = {

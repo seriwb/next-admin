@@ -1,0 +1,90 @@
+@use 'styles/utils';
+
+.container {
+  height: 100%;
+  background-color: #fff;
+  border: 1px solid utils.$borderColor;
+  border-radius: 8px;
+}
+
+.condition {
+  background-color: #f5f5f5;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid utils.$borderColor;
+}
+
+.content {
+  height: calc(100vh - 300px);
+  padding: 1rem 1rem 2rem;
+}
+
+.results {
+  margin: 0 0 1rem;
+  font-weight: bold;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .header {
+    display: flex;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid;
+    border-bottom-color: utils.$borderColor;
+  }
+
+  .body {
+    // TODO: ajust scroll
+    height: calc(100% - 100px);
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  td {
+    padding: 0.5rem;
+    text-align: left;
+    line-height: 1.5;
+
+    .icon {
+      width: 24px;
+      vertical-align: bottom;
+    }
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.row {
+  border-bottom: 1px solid utils.$borderColor;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 0.5rem 0;
+}
+
+.paginationBox {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .pagination {
+    position: absolute;
+    width: 500px;
+    bottom: 120px;
+  }
+}

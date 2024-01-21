@@ -5,8 +5,12 @@ import prisma from '@/libs/prisma';
 
 const saltRounds = 10;
 
-export type Condition = {
+export type AccountListCondition = {
   email?: string;
+  name?: string;
+  orderBy?: string;
+  limit?: number;
+  offset?: number;
 };
 
 export const tryLogin = async (username: string, password: string): Promise<LoginUser | null> => {
@@ -25,12 +29,6 @@ export const tryLogin = async (username: string, password: string): Promise<Logi
   }
 };
 
-export const getAccountCount = async (condition: Condition): Promise<number> => {
-  const filter = condition.email ? { where: { email: { search: `${condition.email}*` } } } : undefined;
-  const result = await prisma.account.count(filter);
-  return result;
-};
-
 export const countActiveAccounts = async (): Promise<number> => {
   const result = await prisma.account.count({ where: { status: 'active' } });
   return result;
@@ -41,25 +39,39 @@ export const getAccountById = async (id: number): Promise<Account | null> => {
   return account;
 };
 
-export const getAccounts = async (
-  condition: Condition,
-  orderBy?: string,
-  limit?: number,
-  offset?: number,
-): Promise<Account[]> => {
-  let query = {};
-  if (condition.email) {
-    query = { where: { email: { search: `${condition.email}*` } } };
-  }
+export const getAccountCount = async (condition: AccountListCondition): Promise<number> => {
+  const filter = {
+    where: {
+      OR: [
+        { email: { startsWith: `%${condition.email}` } },
+        { name: { startsWith: `%${condition.name}` } }
+      ]
+    },
+  };
+  const result = await prisma.account.count(filter);
+  return result;
+};
 
-  if (orderBy === 'recent') {
+export const getAccounts = async (condition: AccountListCondition): Promise<Account[]> => {
+  let query = {};
+
+  query = {
+    where: {
+      OR: [
+        { email: { startsWith: `%${condition.email}` } },
+        { name: { startsWith: `%${condition.name}` } }
+      ]
+    },
+  };
+
+  if (condition.orderBy === 'recent') {
     query = { ...query, orderBy: { createdAt: 'desc' } };
   } else {
     query = { ...query, orderBy: { createdAt: 'asc' } };
   }
 
-  offset && offset >= 0 && (query = { ...query, skip: offset });
-  limit && limit >= 0 && (query = { ...query, take: limit });
+  condition.offset && condition.offset >= 0 && (query = { ...query, skip: condition.offset });
+  condition.limit && condition.limit >= 0 && (query = { ...query, take: condition.limit });
 
   const result = await prisma.account.findMany(query);
   return result;

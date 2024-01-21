@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../router";
+import { protectedProcedure, router } from "../router";
 
 export const userRouter = router({
   // TODO
