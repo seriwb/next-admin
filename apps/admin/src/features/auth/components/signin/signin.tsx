@@ -50,7 +50,7 @@ export const SignIn = ({ user }: Props) => {
     <div className={ss.container}>
       <h1 className={ss.title}>Sign in</h1>
       {user && user.status === 'suspend' && (
-        <div className={ss.error}>
+        <div className={ss.suspend}>
           <p className={ss.message}>Your account has been suspended for the following reasons:</p>
           <p className={ss.message}>f</p>
         </div>
@@ -76,7 +76,7 @@ export const SignIn = ({ user }: Props) => {
           errorMessage={errors?.password?.message}
           register={register}
         />
-        {error && <p>{error}</p>}
+        {error && <p className={ss.error}>{error}</p>}
         <div className={ss.box}>
           <div className={ss.login}>
             <Button label='sign in' loading={isSubmitting} onClick={signInSubmit} />

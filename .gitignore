@@ -3,4 +3,8 @@
 .DS_Store
 *.log
 /node_modules
+.env
 .env.production
+
+.yarn/
+!.yarn/releases/*

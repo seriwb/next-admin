@@ -14,8 +14,9 @@
     "db:generate": "yarn workspace @next-admin/db generate",
     "db:studio": "yarn workspace @next-admin/db studio",
     "ncu": "yarn workspace admin ncu && yarn workspace @next-admin/db ncu",
-    "ncuu": "yarn workspace admin ncuu && yarn workspace @next-admin/db ncuu",
+    "ncuu": "yarn workspaces foreach -A run ncuu",
     "ncum": "yarn workspace admin ncum && yarn workspace @next-admin/db ncum",
-    "ncumu": "yarn workspace admin ncumu && yarn workspace @next-admin/db ncumu"
-  }
+    "ncumu": "yarn workspaces foreach -A run ncumu"
+  },
+  "packageManager": "yarn@4.0.2"
 }

@@ -20,6 +20,7 @@ $border-color: #d8dbe0;
 
   .navLeft {
   }
+
   .navRight {
     margin-right: 4rem;
   }
@@ -27,25 +28,28 @@ $border-color: #d8dbe0;
 
 .dropdownIcon {
   --var-color: #7b7b7b;
+
   width: 48px;
   height: 48px;
   border-radius: 50%;
   color: var(--var-color);
   border: 2px solid var(--var-color);
   overflow: hidden;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .dropdownMenu {
   width: 240px;
   padding: 0.5rem 1rem;
   color: $font-color;
+
   .title {
     margin-top: 0;
     color: inherit;
   }
+
   .menu {
     color: inherit;
 
@@ -58,10 +62,12 @@ $border-color: #d8dbe0;
       align-items: center;
       gap: 0.5rem;
       cursor: pointer;
+
       &:hover {
         background-color: utils.$selectColor;
       }
     }
+
     .divider {
       margin: 0.5rem -1rem;
       border-top: 1px solid $border-color;

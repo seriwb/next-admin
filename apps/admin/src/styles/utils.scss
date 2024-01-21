@@ -4,7 +4,6 @@ $breakpoints: (
   'lg': 992px,
   'xl': 1200px,
 );
-
 $lightColor: #f3fbfd;
 $baseColor: #e8f9fd;
 $mainColor: #79dae8;
@@ -12,7 +11,6 @@ $subColor: #0aa1dd;
 $accentColor: #2155cd;
 $validColor: #2eb85c;
 $invalidColor: #e55353;
-
 $menuColor: #7b7b7b;
 $selectColor: #dfecff;
 $borderColor: #d8dbe0;
@@ -24,13 +22,13 @@ $borderColor: #d8dbe0;
 }
 
 @mixin sp {
-  @media screen and (max-width: 768px) {
+  @media screen and (width <= 768px) {
     @content;
   }
 }
 
 @mixin pc {
-  @media screen and (min-width: 769px) {
+  @media screen and (width >= 769px) {
     @content;
   }
 }

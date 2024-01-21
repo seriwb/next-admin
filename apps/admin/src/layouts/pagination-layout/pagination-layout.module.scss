@@ -26,6 +26,7 @@
 .table {
   width: 100%;
   margin-bottom: 1rem;
+
   thead {
     position: sticky;
     top: 0;
@@ -37,7 +38,6 @@
     font-weight: bold;
     padding-top: 0.5rem;
     text-align: left;
-
     border-bottom: 1px solid;
     border-bottom-color: utils.$borderColor;
   }
@@ -46,6 +46,7 @@
     // TODO: ajust scroll
     height: calc(100% - 100px);
     overflow-y: scroll;
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -55,18 +56,16 @@
     padding: 0.5rem;
     text-align: left;
     line-height: 1.5;
+
+    .icon {
+      width: 24px;
+      vertical-align: bottom;
+    }
   }
 
   .row {
     display: flex;
     align-items: center;
-  }
-
-  td {
-    .icon {
-      width: 24px;
-      vertical-align: bottom;
-    }
   }
 }
 

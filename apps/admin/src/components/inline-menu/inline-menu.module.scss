@@ -8,10 +8,10 @@
   border: 2px solid utils.$subColor;
   background-color: #fff;
   overflow: hidden;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
   &:hover {
     color: utils.$baseColor;
     background-color: utils.$subColor;
