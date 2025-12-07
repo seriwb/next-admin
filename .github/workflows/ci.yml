@@ -3,61 +3,82 @@ name: "CI"
 on:
   pull_request:
     types: [opened, synchronize, labeled]
+  push:
+    branches:
+      - main
 
 jobs:
   changes:
     runs-on: ubuntu-latest
-    if: (github.event.action == 'labeled' && github.event.label.name == 'ci') || (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ci'))
+    if: |
+      (github.event.action == 'labeled' && github.event.label.name == 'ci') ||
+      (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ci')) ||
+      github.event_name == 'push'
     outputs:
       web: ${{ steps.filter.outputs.web }}
       admin: ${{ steps.filter.outputs.admin }}
+      ci: ${{ steps.filter.outputs.ci }}
     steps:
-    - uses: actions/checkout@v3
-    - uses: dorny/paths-filter@v2
-      id: filter
-      with:
-        filters: |
-          web:
-            - 'apps/web/**'
-          admin:
-            - 'apps/admin/**'
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            web:
+              - 'apps/web/**'
+            admin:
+              - 'apps/admin/**'
+            ci:
+              - '.github/workflows/ci.yml'
 
   # web:
   #   needs: changes
-  #   if: ${{ needs.changes.outputs.web == 'true' }}
+  #   if: ${{ needs.changes.outputs.web == 'true' || needs.changes.outputs.ci == 'true' }}
   #   runs-on: ubuntu-latest
   #   defaults:
   #     run:
   #       working-directory: .
   #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Use Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: "20.5.0"
-  #         cache: 'yarn'
-  #         cache-dependency-path: yarn.lock
-  #     - name: Install dependencies
-  #       run: yarn install --prefer-offline
-  #     - name: Build
-  #       run: yarn web:build
+  #     - uses: actions/checkout@v4
 
   admin:
     needs: changes
-    if: ${{ needs.changes.outputs.admin == 'true' }}
+    if: ${{ needs.changes.outputs.admin == 'true' || needs.changes.outputs.ci == 'true' }}
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: .
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Setup node
+        uses: actions/setup-node@v4
         with:
-          node-version: "20.5.0"
-          cache: 'yarn'
+          node-version: "24.1.0"
+          cache: "yarn"
           cache-dependency-path: yarn.lock
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+      - name: Cache yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            apps/admin/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install --prefer-offline
+        run: yarn install --immutable
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/apps/admin/.next/cache
+          key: ${{ runner.os }}-admin-nextjs-${{ hashFiles('yarn.lock') }}-${{ hashFiles('apps/admin/**/*.js', 'apps/admin/**/*.jsx', 'apps/admin/**/*.ts', 'apps/admin/**/*.tsx', '!node_modules/**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-admin-nextjs-${{ hashFiles('yarn.lock') }}-
       - name: Build
         run: yarn admin:build
