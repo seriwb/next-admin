@@ -3,10 +3,21 @@
 .container {
   width: 100%;
   display: inline-flex;
-  gap: 1rem;
-  padding: 1rem;
+  justify-content: space-between;
 }
 
-.search {
-  width: 300px;
+.condition {
+  display: inline-flex;
+  gap: 1rem;
+  padding: 1rem;
+
+  .search {
+    width: 300px;
+  }
+}
+
+.new {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
 }

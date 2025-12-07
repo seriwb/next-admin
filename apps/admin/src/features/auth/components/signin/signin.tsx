@@ -72,7 +72,7 @@ export const SignIn = ({ user }: Props) => {
           label='Password'
           validate={{ maxLength: 128 }}
           placeholder='enter password...'
-          autoComplete='current-password'
+          autoComplete='on'
           errorMessage={errors?.password?.message}
           register={register}
         />

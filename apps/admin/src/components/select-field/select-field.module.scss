@@ -14,11 +14,13 @@
   width: 216px;
   height: 100%;
   z-index: 10;
+
   div {
     height: 100%;
     align-items: center;
   }
-  [id*=placeholder] {
+
+  [id*='placeholder'] {
     display: flex;
     align-items: center;
   }

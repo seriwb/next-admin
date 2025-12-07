@@ -1,5 +1,3 @@
-'use client';
-
 import { AccountList } from "@/features/accounts";
 
 const AccountsPage = () => {

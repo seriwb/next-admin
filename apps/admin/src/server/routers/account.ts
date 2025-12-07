@@ -10,7 +10,7 @@ export const accountRouter = router({
     const existed = await checkActiveAccountExist();
     return { existed: existed };
   }),
-  createFirstuser: publicProcedure
+  createFirstAccount: publicProcedure
     .input(
       z.object({
         username: z.string().email('ID must be in email address format.'),
@@ -19,6 +19,17 @@ export const accountRouter = router({
     )
     .mutation(async ({ input }) => {
       const newUser: Account = await createNewAccount(input.username, input.password, 'SuperAdmin');
+      return newUser;
+    }),
+  createNewAccount: publicProcedure
+    .input(
+      z.object({
+        email: z.string().email('ID must be in email address format.'),
+        password: z.string().min(4, 'Password must contain at least 4 character(s).'),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const newUser: Account = await createNewAccount(input.email, input.password, 'SuperAdmin');
       return newUser;
     }),
   list: protectedProcedure

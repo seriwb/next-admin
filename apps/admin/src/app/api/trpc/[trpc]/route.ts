@@ -15,7 +15,8 @@ const handler = (request: Request) => {
       const session = await getAppSession();
       return { session };
     },
-    // TODO
+    // TODO: 最適化しきれていないので、運用に合わせて変更すること
+    // 変更した場合はTRPCClientErrorの利用箇所を横展開して修正すること
     onError({ error }) {
       if (error.cause instanceof z.ZodError) {
         error.message = error.cause.issues[0].message;
