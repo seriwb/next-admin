@@ -1,5 +1,6 @@
 import { signOut } from 'next-auth/react';
 import { BoxArrowRight, Person } from 'react-bootstrap-icons';
+import { Breadcrumb } from '@/components/breadcrumb';
 import { Dropdown, DropdownMenu, DropdownToggle } from '@/components/dropdown';
 import ss from './header.module.scss';
 
@@ -39,7 +40,9 @@ export const Header = () => {
         </div>
       </div>
       <div className={ss.divider} />
-      breadcrumb
+      <div className={ss.breadcrumb}>
+        <Breadcrumb />
+      </div>
     </div>
   );
 };

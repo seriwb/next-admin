@@ -1,6 +1,4 @@
 import '@/styles/globals.scss';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'simplebar-react/dist/simplebar.min.css';
 import React from 'react';

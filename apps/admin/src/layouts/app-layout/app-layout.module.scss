@@ -7,4 +7,9 @@
 
 .contents {
   flex: 1 0 auto;
+  background-color: utils.$lightColor;
+}
+
+.main {
+  margin: 1.5rem;
 }

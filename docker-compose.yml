@@ -16,7 +16,7 @@ services:
       - next-admin-network
 
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:3.0.2
     container_name: next-admin_localstack
     ports:
       - "4566:4566"            # LocalStack Gateway

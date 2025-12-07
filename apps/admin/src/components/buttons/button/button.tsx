@@ -18,7 +18,7 @@ export const Button = (props: Props) => {
         {loading !== undefined && loading && (
           <ClipLoader
             size={20}
-            color='#ffffff'
+            color='#2155cd'
             cssOverride={{
               marginRight: 8,
             }}

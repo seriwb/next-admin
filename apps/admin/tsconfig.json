@@ -8,7 +8,7 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "types": ["node", "gtag.js"],
+    "types": ["node"],
     "typeRoots": ["src/types", "./node_modules/@types", "../../node_modules/@types"],
     "esModuleInterop": true,
     "module": "esnext",

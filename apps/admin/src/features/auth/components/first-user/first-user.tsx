@@ -30,7 +30,7 @@ export const FirstUser = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const ret = trpc.account.checkActiveAccountExist.useQuery();
-  const { mutateAsync: firstuserMutation } = trpc.account.createFirstuser.useMutation();
+  const { mutateAsync: firstuserMutation } = trpc.account.createFirstAccount.useMutation();
 
   const signUpSubmit = handleSubmit(async (data: FirstUserForm) => {
     if (data.password !== data.confirmPassword) {
@@ -117,7 +117,7 @@ export const FirstUser = () => {
           required={true}
           validate={{ maxLength: 128 }}
           placeholder='enter password...'
-          autoComplete='current-password'
+          autoComplete='new-password'
           errorMessage={errors?.password?.message}
           register={register}
         />
@@ -130,7 +130,7 @@ export const FirstUser = () => {
             maxLength: 128,
             validate: (v: string) => {
               if (v !== watch('password')) {
-                return 'Passwords do not match.';
+                return 'Password doesn\'t match.';
               }
             },
           }}
