@@ -1,4 +1,4 @@
-import ss from './form-feedback.module.scss';
+import ss from "./form-feedback.module.scss";
 
 type Props = {
   children: React.ReactNode;

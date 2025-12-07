@@ -1,9 +1,8 @@
-import "react-datepicker/dist/react-datepicker.min.css";
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import 'simplebar-react/dist/simplebar.min.css';
-import "../src/styles/globals.scss";
-import LegacyImage from "next/legacy/image";
 import Image from "next/image";
+import LegacyImage from "next/legacy/image";
+import "react-datepicker/dist/react-datepicker.min.css";
+import "simplebar-react/dist/simplebar.min.css";
+import "../src/styles/globals.css";
 
 Image.propTypes = {
   unoptimized: null,
@@ -42,7 +41,7 @@ export const parameters = {
   },
   nextjs: {
     appDirectory: true,
-  }
+  },
 };
 
 const preview = {

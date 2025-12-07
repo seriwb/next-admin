@@ -31,10 +31,9 @@ $ yarn dev
 
 - http://localhost:3500/
 
-##  4. create first account
+## 4. create first account
 
 - http://localhost:3500/firstuser
-
 
 # Storybook
 

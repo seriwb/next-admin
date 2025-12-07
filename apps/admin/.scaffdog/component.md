@@ -1,16 +1,16 @@
 ---
-name: 'component'
-root: './src/components'
-output: '**/*'
+name: "component"
+root: "./src/components"
+output: "**/*"
 ignore: []
 questions:
-  name: 'Please enter component name:'
+  name: "Please enter component name:"
 ---
 
 # `{{ inputs.name }}/index.ts`
 
 ```typescript
-export * from './{{ inputs.name }}';
+export * from "./{{ inputs.name }}";
 ```
 
 # `{{ inputs.name }}/{{ inputs.name }}.tsx`
@@ -33,7 +33,7 @@ export const {{ inputs.name | pascal }} = (props: Props) => {
 # `{{ inputs.name }}/{{ inputs.name }}.module.scss`
 
 ```css
-@use 'styles/utils';
+@use "styles/utils" as utils;
 
 .container {
 }

@@ -1,4 +1,4 @@
-@use 'styles/utils';
+@use "styles/utils" as utils;
 
 .container {
   display: inline-flex;
@@ -20,7 +20,7 @@
     align-items: center;
   }
 
-  [id*='placeholder'] {
+  [id*="placeholder"] {
     display: flex;
     align-items: center;
   }

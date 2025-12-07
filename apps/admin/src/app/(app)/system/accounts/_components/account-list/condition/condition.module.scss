@@ -1,0 +1,23 @@
+@use "styles/utils" as utils;
+
+.container {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.condition {
+  display: inline-flex;
+  gap: 1rem;
+  padding: 1rem;
+
+  .search {
+    width: 300px;
+  }
+}
+
+.new {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}

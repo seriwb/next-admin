@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { FirstUser } from '@/features/auth';
+import { FirstUser } from "./_components/first-user";
 
 const FirstUserPage = () => {
   return <FirstUser />;

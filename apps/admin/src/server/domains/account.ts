@@ -1,10 +1,11 @@
-import { Prisma, Account } from '@prisma/client';
-import { AccountSummary } from '@/features/accounts';
-import { LoginUser } from '@/features/auth';
-import { OffsetPaginator } from '@/types/api';
-import { Privilege } from '@/types/application';
+import type { Account, Prisma } from "@prisma/client";
+import type { AccountSummary } from "@/app/(app)/system/accounts/_components/types";
+import type { LoginUser } from "@/app/(auth)/signin/_components/types";
+import type { OffsetPaginator } from "@/types/api";
+import type { Privilege } from "@/types/application";
+import type {
+  AccountListCondition} from "../repositories/account";
 import {
-  AccountListCondition,
   countActiveAccounts,
   createAccount,
   deleteOneAccount,
@@ -13,7 +14,7 @@ import {
   getAccounts,
   tryLogin,
   updateOneAccount,
-} from '../repositories/account';
+} from "../repositories/account";
 
 // login check
 export const login = async (username: string, password: string): Promise<LoginUser | null> => {
@@ -49,13 +50,13 @@ export const createNewAccount = async (
   username: string,
   password: string,
   privilege: Privilege,
-  name?: string,
+  name?: string
 ): Promise<Account> => {
   const newOne = {
     email: username,
     password: password,
     privilege: privilege,
-    status: 'active',
+    status: "active",
     name: name,
   };
 
@@ -68,7 +69,7 @@ export const updateAccount = async (id: number, account: Prisma.AccountUpdateInp
     const result = await updateOneAccount(id, account);
     return result;
   } catch (e) {
-    throw new Error('Account update failed!');
+    throw new Error("Account update failed!");
   }
 };
 

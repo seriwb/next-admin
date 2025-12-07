@@ -3,14 +3,12 @@
 wip
 
 ## base libraries
-- Next.js (appDir style)
-- Auth.js
+- Next.js v16 (appDir style)
+- Better Auth
 - tRPC
-- next-connect
 - SASS
 - prisma
 - yarn workspace
-- storybook
 - quill
 - resend
 

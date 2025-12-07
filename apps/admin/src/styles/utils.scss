@@ -1,8 +1,10 @@
+@use "sass:map";
+
 $breakpoints: (
-  'sm': 320px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
+  "sm": 320px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
 );
 $lightColor: #f3fbfd;
 $baseColor: #e8f9fd;
@@ -13,10 +15,10 @@ $validColor: #2eb85c;
 $invalidColor: #e55353;
 $menuColor: #7b7b7b;
 $selectColor: #dfecff;
-$borderColor: #d8dbe0;
+$borderColor: #7b7b7b;
 
 @mixin mq($size) {
-  @media screen and (max-width: #{map-get($breakpoints, $size)}) {
+  @media screen and (max-width: #{map.get($breakpoints, $size)}) {
     @content;
   }
 }

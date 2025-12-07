@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import NextAuth from "next-auth"
+import NextAuth from "next-auth";
+import type { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
   /**
@@ -10,6 +11,6 @@ declare module "next-auth" {
     user: {
       status: string;
       privilege: string;
-    } & DefaultSession["user"]
+    } & DefaultSession["user"];
   }
 }

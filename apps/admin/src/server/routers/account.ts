@@ -1,46 +1,28 @@
-import { Account } from '@prisma/client';
-import { z } from 'zod';
-import { AccountSummary } from '@/features/accounts/types';
-import { OffsetPaginator } from '@/types/api';
-import { checkActiveAccountExist, createNewAccount, getAccountList } from '../domains/account';
-import { protectedProcedure, publicProcedure, router } from '../router';
+import type { Account } from "@prisma/client";
+import { z } from "zod";
+import { listAccountSchema } from "@/app/(app)/system/accounts/_components/schemas";
+import type { AccountSummary } from "@/app/(app)/system/accounts/_components/types";
+import { createNewAccountSchema } from "@/app/(app)/system/accounts/new/_components/schemas";
+import { createFirstAccountSchema } from "@/app/(auth)/firstuser/_components/schemas";
+import type { OffsetPaginator } from "@/types/api";
+import { checkActiveAccountExist, createNewAccount, getAccountList } from "../domains/account";
+import { protectedProcedure, publicProcedure, router } from "../router";
 
 export const accountRouter = router({
   checkActiveAccountExist: publicProcedure.query(async () => {
     const existed = await checkActiveAccountExist();
     return { existed: existed };
   }),
-  createFirstAccount: publicProcedure
-    .input(
-      z.object({
-        username: z.string().email('ID must be in email address format.'),
-        password: z.string().min(4, 'Password must contain at least 4 character(s).'),
-      }),
-    )
-    .mutation(async ({ input }) => {
-      const newUser: Account = await createNewAccount(input.username, input.password, 'SuperAdmin');
-      return newUser;
-    }),
-  createNewAccount: publicProcedure
-    .input(
-      z.object({
-        email: z.string().email('ID must be in email address format.'),
-        password: z.string().min(4, 'Password must contain at least 4 character(s).'),
-      }),
-    )
-    .mutation(async ({ input }) => {
-      const newUser: Account = await createNewAccount(input.email, input.password, 'SuperAdmin');
-      return newUser;
-    }),
+  createFirstAccount: publicProcedure.input(createFirstAccountSchema).mutation(async ({ input }) => {
+    const newUser: Account = await createNewAccount(input.username, input.password, "SuperAdmin");
+    return newUser;
+  }),
+  createNewAccount: publicProcedure.input(createNewAccountSchema).mutation(async ({ input }) => {
+    const newUser: Account = await createNewAccount(input.email, input.password, "SuperAdmin");
+    return newUser;
+  }),
   list: protectedProcedure
-    .input(
-      z.object({
-        query: z.string().optional(),
-        sort: z.string().optional(),
-        page: z.number().int().positive(),
-        perPage: z.number().int().positive(),
-      }),
-    )
+    .input(listAccountSchema)
     .output(z.custom<OffsetPaginator<AccountSummary>>())
     .query(async ({ input }) => {
       const limit = input.perPage;

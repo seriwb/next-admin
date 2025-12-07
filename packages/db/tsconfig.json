@@ -16,17 +16,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "src",
-    "paths": {
-      "@/*": ["./*"]
-    },
+    "paths": { "@/*": ["./*"] },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "incremental": true,
     "sourceMap": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "dist",
+    "outDir": "dist"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["prisma/**/*.ts"],
   "exclude": ["node_modules"]
 }

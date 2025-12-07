@@ -1,10 +1,10 @@
-import React from 'react';
-import clsx from 'clsx';
-import Link from 'next/link';
-import SimpleBar from 'simplebar-react';
-import { APP_NAME } from '@/constants/application';
-import navigation, { Navigation } from './_nav';
-import ss from './sidebar.module.scss';
+import React from "react";
+import Link from "next/link";
+import clsx from "clsx";
+import SimpleBar from "simplebar-react";
+import { APP_NAME } from "@/constants/application";
+import navigation, { type Navigation } from "./_nav";
+import ss from "./sidebar.module.scss";
 
 type Props = {
   pathname: string;
@@ -14,7 +14,7 @@ type Props = {
 export const Sidebar = (props: Props) => {
   return (
     <div className={ss.container}>
-      <Link href='/'>
+      <Link href="/">
         <div className={ss.brand}>{APP_NAME}</div>
       </Link>
       <div className={ss.nav}>
@@ -34,7 +34,7 @@ const navItem = (item: Navigation, index: number, pathname: string, userPrivileg
     return;
   }
 
-  const isActive = component === 'item' && !items;
+  const isActive = component === "item" && !items;
   return (
     <React.Fragment key={index}>
       {to ? (
@@ -43,7 +43,7 @@ const navItem = (item: Navigation, index: number, pathname: string, userPrivileg
             className={clsx(
               ss.navLink,
               isActive && pathname.startsWith(to) && ss.active,
-              component === 'item' && ss.selected,
+              component === "item" && ss.selected
             )}
           >
             {icon && icon}
@@ -55,8 +55,8 @@ const navItem = (item: Navigation, index: number, pathname: string, userPrivileg
           className={clsx(
             ss.navLink,
             isActive && ss.active,
-            component === 'title' && ss.title,
-            component === 'item' && ss.selected,
+            component === "title" && ss.title,
+            component === "item" && ss.selected
           )}
         >
           {icon && icon}

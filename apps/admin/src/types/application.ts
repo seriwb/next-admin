@@ -1,4 +1,4 @@
-import { ACCOUNT_PRIVILEGE } from "@/constants/application";
+import type { ACCOUNT_PRIVILEGE } from "@/constants/application";
 
 export type valueOf<T> = T[keyof T];
 

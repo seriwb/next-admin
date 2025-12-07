@@ -1,7 +1,7 @@
-import { Prisma, Account } from '@prisma/client';
-import { compare, hash } from 'bcrypt';
-import { LoginUser } from '@/features/auth';
-import prisma from '@/libs/prisma';
+import type { Account, Prisma } from "@prisma/client";
+import { compare, hash } from "bcrypt";
+import type { LoginUser } from "@/app/(auth)/signin/_components/types";
+import prisma from "@/libs/prisma";
 
 const saltRounds = 10;
 
@@ -30,7 +30,7 @@ export const tryLogin = async (username: string, password: string): Promise<Logi
 };
 
 export const countActiveAccounts = async (): Promise<number> => {
-  const result = await prisma.account.count({ where: { status: 'active' } });
+  const result = await prisma.account.count({ where: { status: "active" } });
   return result;
 };
 
@@ -42,10 +42,7 @@ export const getAccountById = async (id: number): Promise<Account | null> => {
 export const getAccountCount = async (condition: AccountListCondition): Promise<number> => {
   const filter = {
     where: {
-      OR: [
-        { email: { startsWith: `%${condition.email}` } },
-        { name: { startsWith: `%${condition.name}` } }
-      ]
+      OR: [{ email: { startsWith: `%${condition.email}` } }, { name: { startsWith: `%${condition.name}` } }],
     },
   };
   const result = await prisma.account.count(filter);
@@ -57,17 +54,14 @@ export const getAccounts = async (condition: AccountListCondition): Promise<Acco
 
   query = {
     where: {
-      OR: [
-        { email: { startsWith: `%${condition.email}` } },
-        { name: { startsWith: `%${condition.name}` } }
-      ]
+      OR: [{ email: { startsWith: `%${condition.email}` } }, { name: { startsWith: `%${condition.name}` } }],
     },
   };
 
-  if (condition.orderBy === 'recent') {
-    query = { ...query, orderBy: { createdAt: 'desc' } };
+  if (condition.orderBy === "recent") {
+    query = { ...query, orderBy: { createdAt: "desc" } };
   } else {
-    query = { ...query, orderBy: { createdAt: 'asc' } };
+    query = { ...query, orderBy: { createdAt: "asc" } };
   }
 
   condition.offset && condition.offset >= 0 && (query = { ...query, skip: condition.offset });

@@ -1,1 +1,1 @@
-export * from './inline-menu';
+export * from "./inline-menu";

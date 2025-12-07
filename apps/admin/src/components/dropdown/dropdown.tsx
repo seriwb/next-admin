@@ -1,7 +1,7 @@
-import { createContext, createRef, useContext, useRef, useState } from 'react';
-import clsx from 'clsx';
-import { useClickAway } from 'react-use';
-import ss from './dropdown.module.scss';
+import { createContext, createRef, useContext, useRef, useState } from "react";
+import clsx from "clsx";
+import { useClickAway } from "react-use";
+import ss from "./dropdown.module.scss";
 
 const ref = createRef<HTMLDivElement>();
 const DropdownContext = createContext({
@@ -46,12 +46,12 @@ export const DropdownToggle = ({ children }: Props) => {
 };
 
 type MenuProps = {
-  position?: 'left' | 'right';
+  position?: "left" | "right";
   children: React.ReactNode;
 };
 
 // Specify the menu display size using children.
-export const DropdownMenu = ({ position = 'left', children }: MenuProps) => {
+export const DropdownMenu = ({ position = "left", children }: MenuProps) => {
   const { ref, show, setShow } = useDropdownContext();
 
   useClickAway(ref, () => {

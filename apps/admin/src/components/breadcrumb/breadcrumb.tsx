@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import clsx from 'clsx';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-import ROUTES from './_routes';
-import ss from './breadcrumb.module.scss';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import clsx from "clsx";
+import ROUTES from "./_routes";
+import ss from "./breadcrumb.module.scss";
 
 type BreadcrumbType = {
   name: string;
@@ -19,19 +19,18 @@ export const Breadcrumb = () => {
   const getBreadcrumbs = (location: string): BreadcrumbType[] => {
     const results: BreadcrumbType[] = [];
 
-    location.split('/').reduce((prev, curr, index, array) => {
+    location.split("/").reduce((prev, curr, index, array) => {
       const currentPath = `${prev}/${curr}`;
       const route = ROUTES.find((route) => route.path === currentPath);
 
       const regexp = /\[(.*?)\]/g; // ex:[id]
-      let realpath = route?.path || '';
+      let realpath = route?.path || "";
       const param = realpath.match(regexp);
       if (param) {
         const regexp2 = /\[(.*?)\]/; // ex:id
-        for (let i = 0; i < param.length; i++) {
-          const bracketValue = param[i] as string;
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          const id = bracketValue.match(regexp2)![1];
+        for (const bracketValue of param) {
+
+          const id = regexp2.exec(bracketValue)![1];
           const idValue = searchParams.get(id);
           if (idValue) {
             realpath = realpath.replace(bracketValue, idValue);
@@ -56,7 +55,7 @@ export const Breadcrumb = () => {
   useEffect(() => {
     const newBreadcrumbs = getBreadcrumbs(pathname);
     setBreadcrumbs(newBreadcrumbs);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   if (!breadcrumbs) {
@@ -66,7 +65,7 @@ export const Breadcrumb = () => {
   return (
     <div className={ss.container}>
       <div className={ss.item}>
-        <Link href='/'>Home</Link>
+        <Link href="/">Home</Link>
       </div>
       {breadcrumbs.map((breadcrumb, index) => {
         return (
