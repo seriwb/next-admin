@@ -7,6 +7,7 @@ import { dirname } from "path";
 import tsEslint from "typescript-eslint";
 import { fileURLToPath } from "url";
 import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,6 +32,7 @@ export default tsEslint.config(
   tsEslint.configs.recommendedTypeChecked,
   tsEslint.configs.stylisticTypeChecked,
   ...nextVitals,
+  ...nextTs,
   // ...tailwind.configs["flat/recommended"],  // TODO: wait v4 support
   eslintConfigPrettier,
   {

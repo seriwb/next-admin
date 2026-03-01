@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { TRPCClientError } from "@trpc/client";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/buttons";
 import { TextInput } from "@/components/forms";
+import { signIn } from "@/lib/auth-client";
 import { trpc } from "@/server/trpc";
 import { ErrorMessages } from "../constants";
 import ss from "./first-user.module.scss";
@@ -45,18 +45,17 @@ export const FirstUser = () => {
         password: data.password,
       });
 
-      signIn("credentials", {
-        redirect: false,
-        username: data.username,
+      const result = await signIn.email({
+        email: data.username,
         password: data.password,
-      }).then((result) => {
-        if (result?.error) {
-          const message = ErrorMessages[result.error] ?? ErrorMessages.default;
-          setErrorMessage(message);
-        } else if (result?.ok) {
-          router.push("/dashboard");
-        }
       });
+
+      if (result.error) {
+        const message = ErrorMessages[result.error.code || ""] ?? ErrorMessages.default;
+        setErrorMessage(message);
+      } else if (result.data) {
+        router.push("/dashboard");
+      }
       setErrorMessage("");
     } catch (e) {
       if (e instanceof TRPCClientError) {

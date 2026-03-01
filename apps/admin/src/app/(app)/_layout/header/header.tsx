@@ -1,14 +1,17 @@
+"use client";
+
 import { LogOut, User } from "lucide-react";
-import { signOut } from "next-auth/react";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { Dropdown, DropdownMenu, DropdownToggle } from "@/components/dropdown";
+import { signOut } from "@/lib/auth-client";
 import ss from "./header.module.scss";
 
 export const Header = () => {
-  const handleSignout = () => {
+  const handleSignout = async () => {
     const ok = confirm("Are you sure you want to sign out?");
     if (ok) {
-      signOut();
+      await signOut();
+      window.location.href = "/";
     }
   };
 

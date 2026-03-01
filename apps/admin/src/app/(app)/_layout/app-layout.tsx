@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import ss from "./app-layout.module.scss";
 import { Footer } from "./footer";
 import { Header } from "./header";
@@ -15,7 +15,7 @@ type Props = {
 export const AppLayout = ({ children }: Props) => {
   const pathname = usePathname() ?? "";
   const { data: session } = useSession();
-  const userPrivilege = session?.user.privilege as string;
+  const userPrivilege = session?.user?.privilege as string;
 
   return (
     <ProtectedView>

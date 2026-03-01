@@ -1,9 +1,10 @@
-import type { DefaultUser } from "next-auth";
-
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-export interface LoginUser extends DefaultUser {
+// Better Auth用のLoginUser型
+export type LoginUser = {
+  id: string;
   email: string;
+  name?: string | null;
+  image?: string | null;
   status: string;
   privilege: string;
-  caution?: string;
-}
+  caution?: string | null;
+};

@@ -1,5 +1,4 @@
 services:
-  # --------------------- Local Infrastractures ---------------------
   postgres:
     image: postgres:18.1
     container_name: next-admin_postgres

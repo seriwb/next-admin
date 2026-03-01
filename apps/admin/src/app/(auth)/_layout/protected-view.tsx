@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 
 type Props = {
   children: React.ReactNode;
@@ -8,10 +10,9 @@ type Props = {
 
 export const ProtectedView = (props: Props) => {
   const router = useRouter();
-  const { data: session, status } = useSession();
-  const loading = status === "loading";
+  const { data: session, isPending } = useSession();
   const isUser = !!session?.user;
-  const activated = session?.user.status === "active";
+  const activated = session?.user?.status === "active";
 
   useEffect(() => {
     if (isUser && activated) {
@@ -19,7 +20,7 @@ export const ProtectedView = (props: Props) => {
     }
   }, [isUser, activated, router]);
 
-  if (loading) {
+  if (isPending) {
     return <></>;
   }
 

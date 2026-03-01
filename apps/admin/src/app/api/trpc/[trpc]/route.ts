@@ -1,7 +1,7 @@
 import "server-only";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { z } from "zod";
-import { getAppSession } from "@/server/auth";
+import { getAppSession } from "@/lib/auth";
 import { appRouter } from "@/server/routers/_app";
 
 const handler = (request: Request) => {

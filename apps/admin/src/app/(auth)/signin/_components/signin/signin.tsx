@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/buttons";
 import { TextInput } from "@/components/forms";
+import { signIn } from "@/lib/auth-client";
 import { ErrorMessages } from "../constants";
 import type { LoginUser } from "../types";
 import ss from "./signin.module.scss";
@@ -32,15 +32,14 @@ export const SignIn = ({ user }: Props) => {
   });
 
   const signInSubmit = handleSubmit(async (data: SignInForm) => {
-    const result = await signIn("credentials", {
-      redirect: false,
-      username: data.username,
+    const result = await signIn.email({
+      email: data.username,
       password: data.password,
     });
 
-    if (result?.error) {
-      setErrorType(result.error);
-    } else if (result?.ok) {
+    if (result.error) {
+      setErrorType(result.error.code || "CredentialsSignin");
+    } else if (result.data) {
       router.refresh();
     }
   });
