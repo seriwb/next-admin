@@ -1,4 +1,4 @@
-import type { Account, Prisma } from "@prisma/client";
+import type { Account, Prisma } from "@next-admin/db/prisma/generated/prisma/client";
 import { compare, hash } from "bcrypt";
 import type { LoginUser } from "@/app/(auth)/signin/_components/types";
 import prisma from "@/lib/prisma";

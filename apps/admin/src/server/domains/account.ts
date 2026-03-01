@@ -1,10 +1,9 @@
-import type { Account, Prisma } from "@prisma/client";
+import type { Account, Prisma } from "@next-admin/db/prisma/generated/prisma/client";
 import type { AccountSummary } from "@/app/(app)/system/accounts/_components/types";
 import type { LoginUser } from "@/app/(auth)/signin/_components/types";
 import type { OffsetPaginator } from "@/types/api";
 import type { Privilege } from "@/types/application";
-import type {
-  AccountListCondition} from "../repositories/account";
+import type { AccountListCondition } from "../repositories/account";
 import {
   countActiveAccounts,
   createAccount,

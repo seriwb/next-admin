@@ -1,4 +1,4 @@
-import type { Account } from "@prisma/client";
+import type { Account } from "@next-admin/db/prisma/generated/prisma/client";
 import { z } from "zod";
 import { listAccountSchema } from "@/app/(app)/system/accounts/_components/schemas";
 import type { AccountSummary } from "@/app/(app)/system/accounts/_components/types";

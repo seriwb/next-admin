@@ -81,4 +81,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-admin-nextjs-${{ hashFiles('yarn.lock') }}-
       - name: Build
+        env:
+          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
         run: yarn admin:build

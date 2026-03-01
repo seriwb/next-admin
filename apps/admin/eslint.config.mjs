@@ -1,13 +1,12 @@
-import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import globals from "globals";
 import { dirname } from "path";
 // import tailwind from "eslint-plugin-tailwindcss";
 import tsEslint from "typescript-eslint";
 import { fileURLToPath } from "url";
-import nextVitals from 'eslint-config-next/core-web-vitals'
-import nextTs from 'eslint-config-next/typescript';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -53,16 +52,25 @@ export default tsEslint.config(
         },
       },
     },
+    settings: {
+      // eslint-plugin-react が ESLint 10 未対応のため、バージョンを明示してauto-detectを回避
+      react: {
+        version: "19",
+      },
+    },
     files: ["**/*.ts", "**/*.tsx"],
     rules: {
       "no-useless-constructor": "warn",
+      // ESLint 10 で eslint:recommended に追加された新ルール（段階的に対応）
+      "no-unassigned-vars": "warn",
+      "no-useless-assignment": "warn",
+      "preserve-caught-error": "warn",
       "react/sort-comp": "warn",
       "require-atomic-updates": "off",
       "@typescript-eslint/consistent-type-definitions": ["warn", "type"],
       "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/explicit-member-accessibility": "off",
-      "@typescript-eslint/prefer-interface": "off",
       "@typescript-eslint/prefer-nullish-coalescing": "off",
       "@typescript-eslint/no-empty-object-type": "warn",
       "@typescript-eslint/no-explicit-any": "off",
@@ -78,7 +86,6 @@ export default tsEslint.config(
           ignoreRestSiblings: true,
         },
       ],
-      "@typescript-eslint/no-var-requires": "off",
       "@typescript-eslint/naming-convention": [
         "warn",
         {
