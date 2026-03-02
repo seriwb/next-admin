@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Button } from "@/components/buttons";
 import { TextInput } from "@/components/forms";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { signIn } from "@/lib/auth-client";
-import { ErrorMessages } from "./constants";
+import { ErrorMessages } from "../_lib/constants";
 
 type SignInForm = {
   username: string;
@@ -17,8 +18,12 @@ type SignInForm = {
 };
 
 export const SignIn = () => {
+  const [toastShown, setToastShown] = useState(false);
   const [errorType, setErrorType] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const errorCode = searchParams?.get("code") ?? "";
+
   const form = useForm<SignInForm>({
     mode: "onBlur",
     defaultValues: {
@@ -27,6 +32,24 @@ export const SignIn = () => {
     },
   });
   const { errors, isSubmitting } = form.formState;
+
+  useEffect(() => {
+    if (errorCode === "E401" && !toastShown) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setToastShown(true);
+      toast.error("認証が無効です。再度ログインしてください。", {
+        duration: 5000,
+        id: "session-invalid-toast",
+      });
+    }
+    if (errorCode === "SignOut" && !toastShown) {
+      setToastShown(true);
+      toast.success("ログアウトしました", {
+        duration: 5000,
+        id: "signout-toast",
+      });
+    }
+  }, [errorCode, toastShown]);
 
   const signInSubmit = async (data: SignInForm) => {
     const result = await signIn.email({

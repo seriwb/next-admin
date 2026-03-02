@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { LogOut, User } from "lucide-react";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { Dropdown, DropdownMenu, DropdownToggle } from "@/components/dropdown";
@@ -7,11 +8,18 @@ import { signOut } from "@/lib/auth-client";
 import ss from "./header.module.scss";
 
 export const Header = () => {
+  const router = useRouter();
+
   const handleSignout = async () => {
-    const ok = confirm("Are you sure you want to sign out?");
+    const ok = confirm("ログアウトしてもよろしいですか？");
     if (ok) {
-      await signOut();
-      window.location.href = "/";
+      await signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/signin?code=SignOut");
+          },
+        },
+      });
     }
   };
 
@@ -28,13 +36,13 @@ export const Header = () => {
             </DropdownToggle>
             <DropdownMenu position="right">
               <div className={ss.dropdownMenu}>
-                <h3 className={ss.title}>Settings</h3>
+                <h3 className={ss.title}>設定</h3>
                 <div className={ss.menu}>
-                  menu
+                  メニュー
                   <div className={ss.divider} />
                   <div className={ss.item} onClick={handleSignout}>
                     <LogOut size={18} />
-                    Sign out
+                    ログアウト
                   </div>
                 </div>
               </div>
