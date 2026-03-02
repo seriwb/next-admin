@@ -20,7 +20,7 @@ export const Sidebar = (props: Props) => {
       <div className={ss.nav}>
         <SimpleBar>
           <div className={ss.navList}>
-            {navigation && navigation.map((item, index) => navItem(item, index, props.pathname, props.userPrivilege))}
+            {navigation?.map((item, index) => navItem(item, index, props.pathname, props.userPrivilege))}
           </div>
         </SimpleBar>
       </div>

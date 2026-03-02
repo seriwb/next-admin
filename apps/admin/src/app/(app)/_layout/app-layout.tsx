@@ -15,12 +15,12 @@ type Props = {
 export const AppLayout = ({ children }: Props) => {
   const pathname = usePathname() ?? "";
   const { data: session } = useSession();
-  const userPrivilege = session?.user?.privilege as string;
+  const userPrivilege = session?.user?.privilege;
 
   return (
     <ProtectedView>
       <div className={ss.container}>
-        <Sidebar pathname={pathname} userPrivilege={userPrivilege} />
+        <Sidebar pathname={pathname} userPrivilege={userPrivilege!} />
         <div className={ss.contents}>
           <Header />
           <div className={ss.page}>

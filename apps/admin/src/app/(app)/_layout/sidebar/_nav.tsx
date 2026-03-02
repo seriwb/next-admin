@@ -1,5 +1,5 @@
 import { Gauge, Users } from "lucide-react";
-import type { Privilege } from "@/types/application";
+import type { Privilege } from "@/types/app";
 
 export type Navigation = {
   component: "title" | "item" | "group";
