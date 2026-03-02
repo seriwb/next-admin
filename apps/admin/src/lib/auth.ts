@@ -3,6 +3,7 @@ import { compare, hash } from "bcrypt";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { customSession } from "better-auth/plugins";
+import { ACCOUNT_PRIVILEGE, ACCOUNT_STATUS } from "@/constants/application";
 import prisma from "@/lib/prisma";
 
 // カスタムユーザー型
@@ -167,8 +168,8 @@ export const auth = betterAuth({
       return {
         user: {
           ...user,
-          status: account?.status ?? "active",
-          privilege: account?.privilege ?? "user",
+          status: account?.status ?? ACCOUNT_STATUS.active,
+          privilege: account?.privilege ?? ACCOUNT_PRIVILEGE.normal,
           caution: account?.caution ?? null,
         },
         session,

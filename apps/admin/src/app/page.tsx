@@ -2,18 +2,17 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { ACCOUNT_STATUS, DEFAULT_VIEW } from "@/constants/application";
 import { useSession } from "@/lib/auth-client";
-import { AuthLayout } from "./(auth)/_layout";
-import SigninPage from "./(auth)/signin/page";
-
-const DEFAULT_VIEW = "/dashboard";
+import { AuthLayout } from "./(auth)/_layout/auth-layout";
+import { SignIn } from "./(auth)/signin/_components/signin";
 
 const Page = () => {
   const router = useRouter();
 
   const { data: session, isPending } = useSession();
   const isUser = !!session?.user;
-  const activated = session?.user?.status === "active";
+  const activated = session?.user?.status === ACCOUNT_STATUS.active;
 
   useEffect(() => {
     if (isPending) {
@@ -31,7 +30,7 @@ const Page = () => {
   if (!isUser || !activated) {
     return (
       <AuthLayout>
-        <SigninPage />
+        <SignIn />
       </AuthLayout>
     );
   }

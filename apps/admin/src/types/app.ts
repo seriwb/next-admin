@@ -2,6 +2,16 @@ import type { ACCOUNT_PRIVILEGE } from "@/constants/application";
 
 export type valueOf<T> = T[keyof T];
 
+export type LoginUser = {
+  id: string;
+  email: string;
+  name?: string | null;
+  image?: string | null;
+  status: string;
+  privilege: string;
+  caution?: string | null;
+};
+
 export type Privilege = keyof typeof ACCOUNT_PRIVILEGE;
 
 type ResultSuccess<T = undefined> = {
