@@ -1,4 +1,5 @@
 *.bk
+/memo
 .vscode
 .DS_Store
 *.log

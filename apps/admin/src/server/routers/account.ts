@@ -3,7 +3,7 @@ import { z } from "zod";
 import { listAccountSchema } from "@/app/(app)/system/accounts/_components/schemas";
 import type { AccountSummary } from "@/app/(app)/system/accounts/_components/types";
 import { createNewAccountSchema } from "@/app/(app)/system/accounts/new/_components/schemas";
-import { createFirstAccountSchema } from "@/app/(auth)/firstuser/_components/schemas";
+import { createFirstAccountSchema } from "@/app/(auth)/firstuser/_lib/schemas";
 import type { OffsetPaginator } from "@/types/api";
 import { checkActiveAccountExist, createNewAccount, getAccountList } from "../domains/account";
 import { protectedProcedure, publicProcedure, router } from "../router";

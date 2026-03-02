@@ -23,7 +23,6 @@ export const SelectField = (props: Props) => {
     props.setValue(option?.value);
   };
 
-   
   let args: any = {
     className: ss.select,
     instanceId: selectId,
@@ -35,6 +34,7 @@ export const SelectField = (props: Props) => {
 
   const selectedValue = props.options.find((option) => option.value == props.value);
   if (selectedValue) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     args = {
       ...args,
       value: selectedValue,

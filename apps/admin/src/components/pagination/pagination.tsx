@@ -1,7 +1,7 @@
-import clsx from "clsx";
-import { useSp } from "@/hooks/useSp";
-import ss from "./pagination.module.scss";
 import type { JSX } from "react";
+import clsx from "clsx";
+import { useIsMobile } from "@/hooks/use-mobile";
+import ss from "./pagination.module.scss";
 
 type Props = {
   page: number; // selected page number
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const Pagination = (props: Props) => {
-  const isSp = useSp();
+  const isSp = useIsMobile();
   const maxViewPage = isSp ? 4 : 6;
   const { page, totalNumber, perPage, onPaging } = props;
 

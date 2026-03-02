@@ -1,5 +1,6 @@
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import { defineConfig } from "eslint/config";
 import { dirname } from "path";
 import tsEslint from "typescript-eslint";
 import { fileURLToPath } from "url";
@@ -7,7 +8,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export default tsEslint.config(
+export default defineConfig(
   { ignores: ["node_modules/", "dist/"] },
   js.configs.recommended,
   tsEslint.configs.recommended,

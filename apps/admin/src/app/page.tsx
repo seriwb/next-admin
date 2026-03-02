@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
-import SigninPage from "./(auth)/signin/page";
 import { AuthLayout } from "./(auth)/_layout";
+import SigninPage from "./(auth)/signin/page";
 
 const DEFAULT_VIEW = "/dashboard";
 

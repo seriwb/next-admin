@@ -24,6 +24,6 @@
     "emitDeclarationOnly": true,
     "outDir": "dist"
   },
-  "include": ["prisma/**/*.ts"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }

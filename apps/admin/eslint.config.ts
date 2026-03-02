@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import { dirname } from "path";
 // import tailwind from "eslint-plugin-tailwindcss";
@@ -11,7 +12,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export default tsEslint.config(
+export default defineConfig(
   {
     ignores: [
       ".next/",
@@ -25,6 +26,7 @@ export default tsEslint.config(
       "tailwind.config.js",
       "src/components/ui/", // shadcn/ui components
       "src/hooks/use-mobile.ts", // shadcn/ui components
+      "**/*.bk",
     ],
   },
   js.configs.recommended,

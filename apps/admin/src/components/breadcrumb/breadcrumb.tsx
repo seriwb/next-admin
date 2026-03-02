@@ -29,7 +29,6 @@ export const Breadcrumb = () => {
       if (param) {
         const regexp2 = /\[(.*?)\]/; // ex:id
         for (const bracketValue of param) {
-
           const id = regexp2.exec(bracketValue)![1];
           const idValue = searchParams.get(id);
           if (idValue) {
