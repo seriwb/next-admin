@@ -1,0 +1,30 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = (await request.json()) as { email: string; password: string };
+
+    const data = await auth.api.signUpEmail({
+      body: {
+        name: "First Admin",
+        email: body.email,
+        password: body.password,
+        image: "https://example.com/image.png",
+      },
+    });
+
+    return NextResponse.json({ success: true, data: data });
+  } catch (error) {
+    console.error("Create first account API error:", error);
+
+    if (error instanceof Error) {
+      return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+  }
+}

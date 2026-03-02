@@ -4,7 +4,6 @@ import { Inter, Montserrat, Noto_Sans_JP, Noto_Sans_Mono } from "next/font/googl
 import { Toaster } from "react-hot-toast";
 import "simplebar-react/dist/simplebar.min.css";
 import { TITLE } from "@/constants/application";
-import { TrpcProvider } from "@/providers/trpc-provider";
 import "@/styles/globals.css";
 
 const noteSansJp = Noto_Sans_JP({
@@ -48,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${noteSansJp.variable} ${noteSansMono.variable} ${inter.variable} ${montserrat.variable} antialiased`}
       >
-        <TrpcProvider>{children}</TrpcProvider>
+        {children}
         <div>
           <Toaster />
         </div>

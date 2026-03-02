@@ -1,9 +1,5 @@
 import type { Account, Prisma } from "@next-admin/db/prisma/generated/prisma/client";
-import { compare, hash } from "bcrypt";
-import type { LoginUser } from "@/app/(auth)/signin/_components/types";
 import prisma from "@/lib/prisma";
-
-const saltRounds = 10;
 
 export type AccountListCondition = {
   email?: string;
@@ -13,28 +9,12 @@ export type AccountListCondition = {
   offset?: number;
 };
 
-export const tryLogin = async (username: string, password: string): Promise<LoginUser | null> => {
-  const user = await prisma.account.findUnique({ where: { email: username } });
-  if (user && (await compare(password, user.password))) {
-    return {
-      id: user.email,
-      email: user.email,
-      status: user.status,
-      privilege: user.privilege,
-      name: user.name,
-      image: user.image,
-    };
-  } else {
-    return null;
-  }
-};
-
 export const countActiveAccounts = async (): Promise<number> => {
   const result = await prisma.account.count({ where: { status: "active" } });
   return result;
 };
 
-export const getAccountById = async (id: number): Promise<Account | null> => {
+export const getAccountById = async (id: string): Promise<Account | null> => {
   const account = await prisma.account.findUnique({ where: { id: id } });
   return account;
 };
@@ -72,13 +52,11 @@ export const getAccounts = async (condition: AccountListCondition): Promise<Acco
 };
 
 export const createAccount = async (account: Prisma.AccountCreateInput): Promise<Account> => {
-  const hashPassword = await hash(account.password, saltRounds);
-  const newAccount = { ...account, password: hashPassword };
-  const ret = await prisma.account.create({ data: newAccount });
+  const ret = await prisma.account.create({ data: account });
   return ret;
 };
 
-export const updateOneAccount = async (id: number, user: Prisma.AccountUpdateInput): Promise<Account> => {
+export const updateOneAccount = async (id: string, user: Prisma.AccountUpdateInput): Promise<Account> => {
   const ret = await prisma.account.update({
     where: { id: id },
     data: {
@@ -91,16 +69,7 @@ export const updateOneAccount = async (id: number, user: Prisma.AccountUpdateInp
   return ret;
 };
 
-export const deleteOneAccount = async (id: number): Promise<boolean> => {
+export const deleteOneAccount = async (id: string): Promise<boolean> => {
   await prisma.account.delete({ where: { id: id } });
   return true;
-};
-
-export const updatePassword = async (username: string, password: string): Promise<boolean> => {
-  const hashPassword = await hash(password, saltRounds);
-  const ret = await prisma.account.update({
-    where: { email: username },
-    data: { password: hashPassword },
-  });
-  return ret ? true : false;
 };

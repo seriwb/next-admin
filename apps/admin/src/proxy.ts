@@ -19,6 +19,6 @@ export const config = {
   matcher: [
     // これらのパスにマッチしない場合、認証チェックを行う
     // CAUTION: 動的生成した文字列では意図通りに動作しない
-    "/((?!firstuser|signin|api/healthcheck|_next/static|_next/image|images|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!firstuser|signin|api|_next/static|_next/image|images|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };

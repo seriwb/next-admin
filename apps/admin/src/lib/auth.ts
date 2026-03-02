@@ -1,4 +1,3 @@
-import "server-only";
 import { headers } from "next/headers";
 import { compare, hash } from "bcrypt";
 import { betterAuth } from "better-auth";
@@ -71,12 +70,6 @@ export const auth = betterAuth({
         required: false,
         returned: true,
       },
-      password: {
-        type: "string",
-        required: true,
-        input: false,
-        returned: false,
-      },
     },
   },
 
@@ -135,6 +128,8 @@ export const auth = betterAuth({
   // メール・パスワード認証を有効化
   emailAndPassword: {
     enabled: true,
+    minPasswordLength: 4,
+    maxPasswordLength: 128,
     // カスタムパスワードハッシュ（bcryptを使用）
     password: {
       hash: async (password) => {
@@ -161,7 +156,7 @@ export const auth = betterAuth({
     customSession(async ({ user, session }) => {
       // Accountテーブルからカスタムフィールドを取得
       const account = await prisma.account.findUnique({
-        where: { id: parseInt(user.id, 10) },
+        where: { id: user.id },
         select: {
           status: true,
           privilege: true,

@@ -1,8 +1,7 @@
 import type { Account, Prisma } from "@next-admin/db/prisma/generated/prisma/client";
 import type { AccountSummary } from "@/app/(app)/system/accounts/_components/types";
-import type { LoginUser } from "@/app/(auth)/signin/_components/types";
-import type { OffsetPaginator } from "@/types/api";
-import type { Privilege } from "@/types/application";
+import type { OffsetPaginator } from "@/types/app";
+import type { Privilege } from "@/types/app";
 import type { AccountListCondition } from "../repositories/account";
 import {
   countActiveAccounts,
@@ -11,22 +10,15 @@ import {
   getAccountById,
   getAccountCount,
   getAccounts,
-  tryLogin,
   updateOneAccount,
 } from "../repositories/account";
-
-// login check
-export const login = async (username: string, password: string): Promise<LoginUser | null> => {
-  const user = await tryLogin(username, password);
-  return user;
-};
 
 export const checkActiveAccountExist = async (): Promise<boolean> => {
   const total = await countActiveAccounts();
   return total > 0 ? true : false;
 };
 
-export const getAccount = async (id: number): Promise<Account | null> => {
+export const getAccount = async (id: string): Promise<Account | null> => {
   const result = await getAccountById(id);
   return result;
 };
@@ -45,15 +37,9 @@ export const getAccountList = async (condition: AccountListCondition): Promise<O
   return { rows: ret, offset: nextOffset, total: total };
 };
 
-export const createNewAccount = async (
-  username: string,
-  password: string,
-  privilege: Privilege,
-  name?: string
-): Promise<Account> => {
+export const createNewAccount = async (username: string, privilege: Privilege, name?: string): Promise<Account> => {
   const newOne = {
     email: username,
-    password: password,
     privilege: privilege,
     status: "active",
     name: name,
@@ -63,16 +49,16 @@ export const createNewAccount = async (
   return ret;
 };
 
-export const updateAccount = async (id: number, account: Prisma.AccountUpdateInput): Promise<Account> => {
+export const updateAccount = async (id: string, account: Prisma.AccountUpdateInput): Promise<Account> => {
   try {
     const result = await updateOneAccount(id, account);
     return result;
-  } catch (e) {
+  } catch (_e) {
     throw new Error("Account update failed!");
   }
 };
 
-export const deleteAccount = async (id: number): Promise<boolean> => {
+export const deleteAccount = async (id: string): Promise<boolean> => {
   const ret = deleteOneAccount(id);
   return ret;
 };

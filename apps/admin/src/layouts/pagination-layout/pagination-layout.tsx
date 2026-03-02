@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ParsedUrlQuery } from "querystring";
 import { Pagination } from "@/components/pagination";
 import { PER_PAGE } from "@/constants/application";
-import { type OffsetPaginator } from "@/types/api";
+import { type OffsetPaginator } from "@/types/app";
 import ss from "./pagination-layout.module.scss";
 
 export type RowProps<T> = { data: T };

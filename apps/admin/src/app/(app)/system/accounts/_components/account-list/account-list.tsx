@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { PaginationLayout, type RowProps } from "@/layouts/pagination-layout";
-import { trpc } from "@/server/trpc";
 import type { AccountSummary } from "../types";
 import ss from "./account-list.module.scss";
 import { Condition } from "./condition";
@@ -15,24 +14,25 @@ export const AccountList = () => {
   // const params = useSearchParams();
   // const [query, setQuery] = useState<URLSearchParams>(new URLSearchParams(params));
   const [sort, setSort] = useState("");
-  const { data, error, isLoading } = trpc.account.list.useQuery({
-    page: page, // parseInt(params.get('page') || '0')
-    perPage: 20,
-    query: query,
-    sort: sort,
-  });
+  // const { data, error, isLoading } = trpc.account.list.useQuery({
+  //   page: page, // parseInt(params.get('page') || '0')
+  //   perPage: 20,
+  //   query: query,
+  //   sort: sort,
+  // });
 
   return (
-    <PaginationLayout<AccountSummary>
-      data={data}
-      errorMessage={error?.message}
-      isLoading={isLoading}
-      page={page - 1}
-      setPage={setPage}
-      Condition={<Condition query={query} setQuery={setQuery} sort={sort} setSort={setSort} />}
-      Header={Header}
-      Row={Row}
-    />
+    // <PaginationLayout<AccountSummary>
+    //   data={data}
+    //   errorMessage={error?.message}
+    //   isLoading={isLoading}
+    //   page={page - 1}
+    //   setPage={setPage}
+    //   Condition={<Condition query={query} setQuery={setQuery} sort={sort} setSort={setSort} />}
+    //   Header={Header}
+    //   Row={Row}
+    // />
+    <></>
   );
 };
 
