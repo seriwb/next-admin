@@ -1,6 +1,6 @@
-import { startTransition, useId, useState } from 'react';
-import { useDebounce } from 'react-use';
-import ss from './search-text.module.scss';
+import { startTransition, useId, useState } from "react";
+import { useDebounce } from "react-use";
+import ss from "./search-text.module.scss";
 
 type Props = {
   label?: string;
@@ -11,7 +11,7 @@ type Props = {
 
 export const SearchText = ({ label, value, setValue, placeholder }: Props) => {
   const searchId = useId();
-  const [input, setInput] = useState(value ?? '');
+  const [input, setInput] = useState(value ?? "");
 
   useDebounce(
     () => {
@@ -20,7 +20,7 @@ export const SearchText = ({ label, value, setValue, placeholder }: Props) => {
       });
     },
     1000,
-    [input],
+    [input]
   );
 
   return (
@@ -32,9 +32,9 @@ export const SearchText = ({ label, value, setValue, placeholder }: Props) => {
       )}
       <input
         className={ss.search}
-        type='search'
+        type="search"
         id={searchId}
-        placeholder={placeholder || 'search...'}
+        placeholder={placeholder || "search..."}
         value={input}
         onChange={({ currentTarget }) => {
           setInput(currentTarget.value);

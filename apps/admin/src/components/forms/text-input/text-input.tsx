@@ -1,7 +1,7 @@
-import { UseFormRegister } from 'react-hook-form';
-import { FormFeedback } from '@/components/forms/form-feedback';
-import { InputTextField } from '@/components/forms/input-text-field';
-import ss from './text-input.module.scss';
+import type { FieldValues, Path, UseFormRegister } from "react-hook-form";
+import { FormFeedback } from "@/components/forms/form-feedback";
+import { InputTextField } from "@/components/forms/input-text-field";
+import ss from "./text-input.module.scss";
 
 export type Validate = {
   maxLength?: number; // defalut 255
@@ -10,15 +10,15 @@ export type Validate = {
     value: RegExp;
     message: string;
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  validate?: any;
+
+  validate?: (v: string) => string | undefined | Promise<string | undefined>;
 };
 
-type Props = {
-  name: string; // form name
+type Props<T extends FieldValues> = {
+  name: Path<T>;
   className?: string;
   label?: string;
-  type?: 'text' | 'password' | 'search' | 'email' | 'tel' | 'url'; // default text
+  type?: "text" | "password" | "search" | "email" | "tel" | "url"; // default text
   placeholder?: string;
   autoComplete?: string;
   autoFocus?: boolean;
@@ -27,15 +27,15 @@ type Props = {
   disabled?: boolean;
   isDirty?: boolean;
   errorMessage?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register: UseFormRegister<any>;
+
+  register: UseFormRegister<T>;
 };
 
-export const TextInput = ({
+export const TextInput = <T extends FieldValues>({
   name,
   className,
   label,
-  type = 'text',
+  type = "text",
   placeholder,
   autoComplete,
   autoFocus,
@@ -45,7 +45,7 @@ export const TextInput = ({
   isDirty,
   errorMessage,
   register,
-}: Props) => {
+}: Props<T>) => {
   const maxLength = validate?.maxLength ?? 255;
   const MAX_LENGTH = {
     maxLength: {
@@ -63,7 +63,7 @@ export const TextInput = ({
 
   const validCondition = required
     ? {
-        required: 'This is a required field.',
+        required: "This is a required field.",
         ...MAX_LENGTH,
         ...MIN_LENGTH,
         pattern: validate?.pattern,

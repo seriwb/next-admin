@@ -1,4 +1,4 @@
-import { AccountList } from "@/features/accounts";
+import { AccountList } from "./_components/account-list";
 
 const AccountsPage = () => {
   return <AccountList />;

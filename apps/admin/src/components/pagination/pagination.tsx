@@ -1,6 +1,7 @@
-import clsx from 'clsx';
-import { useSp } from '@/hooks/useSp';
-import ss from './pagination.module.scss';
+import type { JSX } from "react";
+import clsx from "clsx";
+import { useIsMobile } from "@/hooks/use-mobile";
+import ss from "./pagination.module.scss";
 
 type Props = {
   page: number; // selected page number
@@ -11,7 +12,7 @@ type Props = {
 };
 
 export const Pagination = (props: Props) => {
-  const isSp = useSp();
+  const isSp = useIsMobile();
   const maxViewPage = isSp ? 4 : 6;
   const { page, totalNumber, perPage, onPaging } = props;
 
@@ -26,12 +27,14 @@ export const Pagination = (props: Props) => {
 
   if (page > 0) {
     Paginations.push(
-      <div className={ss.item} key={'Top'} aria-label='Top' onClick={() => handlePagination(0)}>
-        <span aria-hidden='true'>TOP</span>
+      <div className={ss.item} key={"Top"} aria-label="Top" onClick={() => handlePagination(0)}>
+        <span aria-hidden="true">TOP</span>
       </div>,
-      <div className={ss.item} key={'Previous'} aria-label='Previous' onClick={() => handlePagination(page - 1)}>
-        <span className={ss.symbol} aria-hidden='true'>&lsaquo;</span>
-      </div>,
+      <div className={ss.item} key={"Previous"} aria-label="Previous" onClick={() => handlePagination(page - 1)}>
+        <span className={ss.symbol} aria-hidden="true">
+          &lsaquo;
+        </span>
+      </div>
     );
   }
 
@@ -57,18 +60,20 @@ export const Pagination = (props: Props) => {
         <div className={ss.item} key={i} onClick={() => handlePagination(paginationNum)}>
           {paginationNum + 1}
         </div>
-      ),
+      )
     );
   }
 
   if (page < totalPages) {
     Paginations.push(
-      <div className={ss.item} key={'Next'} aria-label='Next' onClick={() => handlePagination(page + 1)}>
-        <span className={ss.symbol} aria-hidden='true'>&rsaquo;</span>
+      <div className={ss.item} key={"Next"} aria-label="Next" onClick={() => handlePagination(page + 1)}>
+        <span className={ss.symbol} aria-hidden="true">
+          &rsaquo;
+        </span>
       </div>,
-      <div className={ss.item} key={'End'} aria-label='End' onClick={() => handlePagination(totalPages)}>
-        <span aria-hidden='true'>END</span>
-      </div>,
+      <div className={ss.item} key={"End"} aria-label="End" onClick={() => handlePagination(totalPages)}>
+        <span aria-hidden="true">END</span>
+      </div>
     );
   }
 

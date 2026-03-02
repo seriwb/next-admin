@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": ["dom", "dom.iterable", "es6", "esnext"],
+    "target": "es2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -12,23 +12,32 @@
     "typeRoots": ["src/types", "./node_modules/@types", "../../node_modules/@types"],
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "verbatimModuleSyntax": true,
+    "jsx": "react-jsx",
     "baseUrl": "src",
-    "paths": {
-      "@/*": ["./*"]
-    },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "incremental": true,
+    "paths": {
+      "@/*": ["./*"],
+      "@images/*": ["../public/images/*"]
+    },
     "plugins": [
       {
         "name": "next"
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/types/svgr.d.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": ["node_modules", ".next"]
 }

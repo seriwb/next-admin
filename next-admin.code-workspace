@@ -18,6 +18,13 @@
     "files.exclude": {
       "apps": true,
       "packages": true,
+    },
+    "files.associations": {
+      "*.css": "tailwindcss",
+    },
+    "tailwindCSS.experimental.configFile": {
+      // "apps/web/src/styles/globals.css": "apps/web/src/**",
+      "apps/admin/src/styles/globals.css": "apps/admin/src/**",
     }
-  }
+  },
 }

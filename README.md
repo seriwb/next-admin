@@ -1,16 +1,13 @@
 # admin application template
 
-wip
+Admin application template using Next.js 16 (App Router) with yarn workspaces monorepo structure.
 
 ## base libraries
-- Next.js (appDir style)
-- Auth.js
-- tRPC
-- next-connect
-- SASS
+- Next.js v16
+- Better Auth
+- TailwindCSS
 - prisma
 - yarn workspace
-- storybook
 - quill
 - resend
 

@@ -1,4 +1,4 @@
-import ss from './styles.module.scss';
+import ss from "./styles.module.scss";
 
 type Props = {
   margin?: string;

@@ -1,6 +1,6 @@
-import { useId } from 'react';
-import Select, { OnChangeValue } from 'react-select';
-import ss from './select-field.module.scss';
+import { useId } from "react";
+import Select, { type OnChangeValue } from "react-select";
+import ss from "./select-field.module.scss";
 
 export type Option<L = string, V = string> = {
   label: L;
@@ -19,11 +19,10 @@ export const SelectField = (props: Props) => {
   const selectId = useId();
 
   const handleSortChange = (v: OnChangeValue<Option, false>) => {
-    const option = v as Option;
+    const option = v!;
     props.setValue(option?.value);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let args: any = {
     className: ss.select,
     instanceId: selectId,
@@ -35,6 +34,7 @@ export const SelectField = (props: Props) => {
 
   const selectedValue = props.options.find((option) => option.value == props.value);
   if (selectedValue) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     args = {
       ...args,
       value: selectedValue,
@@ -53,7 +53,7 @@ export const SelectField = (props: Props) => {
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
-            boxShadow: state.isFocused ? '0 0 0 1.5px #2155cd' : 'none',
+            boxShadow: state.isFocused ? "0 0 0 1.5px #2155cd" : "none",
           }),
         }}
       />

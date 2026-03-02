@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
-import { ParsedUrlQuery } from 'querystring';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Pagination } from '@/components/pagination';
-import { PER_PAGE } from '@/constants/application';
-import { OffsetPaginator } from '@/types/api';
-import ss from './pagination-layout.module.scss';
+import { type Dispatch, type SetStateAction, useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { type ParsedUrlQuery } from "querystring";
+import { Pagination } from "@/components/pagination";
+import { PER_PAGE } from "@/constants/application";
+import { type OffsetPaginator } from "@/types/app";
+import ss from "./pagination-layout.module.scss";
 
 export type RowProps<T> = { data: T };
 
@@ -33,10 +33,9 @@ export const PaginationLayout = function <T>(props: Props<T>) {
   const ref = useRef<HTMLDivElement>(null);
   const scrollTop = useCallback(() => {
     ref?.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
+      behavior: "smooth",
+      block: "end",
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
   // useEffect(() => {

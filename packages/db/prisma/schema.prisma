@@ -3,34 +3,40 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  provider               = "prisma-client"
+  output                 = "./generated/prisma"
+  moduleFormat           = "esm"
+  generatedFileExtension = "ts"
+  importFileExtension    = "ts"
+  previewFeatures        = ["fullTextSearchPostgres"]
 }
 
-// Admin account
+// Admin account (Better Auth user table)
 model Account {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique @db.Text()
-  password  String   @db.Text()
-  status    String   @db.Text()
-  privilege String   @db.Text()
-  caution   String?  @db.Text() // suspended reason
-  name      String?  @db.Text()
-  image     String?  @db.Text()
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp()
-  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamp()
+  id            String   @id @default(uuid())
+  email         String   @unique @db.Text()
+  status        String   @db.Text()
+  privilege     String   @db.Text()
+  caution       String?  @db.Text() // suspended reason
+  name          String?  @db.Text()
+  image         String?  @db.Text()
+  emailVerified Boolean  @default(false) @map("email_verified")
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamp()
+
+  // Better Auth relations
+  sessions   BaSession[]
+  baAccounts BaAccount[]
 
   @@map("account")
 }
 
 // Service user
 model User {
-  id        Int      @id @default(autoincrement())
-  uuid      String   @unique @db.Text()
+  id        String   @id @default(uuid())
   email     String   @unique @db.Text()
   password  String   @db.Text()
   status    String   @db.Text()
@@ -56,4 +62,52 @@ model Article {
   @@map("article")
 }
 
-// log
+// Better Auth: Session table
+model BaSession {
+  id        String   @id
+  expiresAt DateTime @map("expires_at") @db.Timestamp()
+  token     String   @unique
+  userId    String   @map("user_id") @db.Text()
+  ipAddress String?  @map("ip_address") @db.Text()
+  userAgent String?  @map("user_agent") @db.Text()
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamp()
+
+  account Account @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("ba_session")
+}
+
+// Better Auth: Account (OAuth provider links) table
+model BaAccount {
+  id                    String    @id
+  accountId             String    @map("account_id") @db.Text()
+  providerId            String    @map("provider_id") @db.Text()
+  userId                String    @map("user_id") @db.Text()
+  accessToken           String?   @map("access_token") @db.Text()
+  refreshToken          String?   @map("refresh_token") @db.Text()
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at") @db.Timestamp()
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at") @db.Timestamp()
+  scope                 String?   @db.Text()
+  password              String?   @db.Text()
+  createdAt             DateTime  @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt             DateTime  @updatedAt @map("updated_at") @db.Timestamp()
+
+  account Account @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("ba_account")
+}
+
+// Better Auth: Verification table
+model BaVerification {
+  id         String   @id
+  identifier String   @db.Text()
+  value      String   @db.Text()
+  expiresAt  DateTime @map("expires_at") @db.Timestamp()
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamp()
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamp()
+
+  @@map("ba_verification")
+}

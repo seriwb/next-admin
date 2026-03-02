@@ -1,8 +1,8 @@
-import { forwardRef } from 'react';
-import clsx from 'clsx';
-import ss from './input-text-field.module.scss';
+import { forwardRef } from "react";
+import clsx from "clsx";
+import ss from "./input-text-field.module.scss";
 
-type Props = React.ComponentPropsWithoutRef<'input'> & {
+type Props = React.ComponentPropsWithoutRef<"input"> & {
   valid?: boolean;
   invalid?: boolean;
 };
@@ -24,4 +24,4 @@ export const InputTextField = forwardRef<HTMLInputElement, Props>((props, ref) =
     </div>
   );
 });
-InputTextField.displayName = 'InputTextField';
+InputTextField.displayName = "InputTextField";
