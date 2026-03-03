@@ -1,9 +1,9 @@
 import React from "react";
 import { redirect } from "next/navigation";
 import { ACCOUNT_STATUS } from "@/constants/application";
+import { NAVIGATION, filterNavigationByPrivilege } from "@/constants/navigation";
 import { getAppSession } from "@/lib/auth";
 import { AppLayout as Layout } from "./_layout";
-import navigation, { filterNavigationByPrivilege } from "./_layout/sidebar/_nav";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await getAppSession();
@@ -13,7 +13,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     redirect("/signin");
   }
 
-  const filteredNav = filterNavigationByPrivilege(navigation, session.user.privilege);
+  const filteredNav = filterNavigationByPrivilege(NAVIGATION, session.user.privilege);
 
-  return <Layout navigation={filteredNav}>{children}</Layout>;
+  return (
+    <Layout navigation={filteredNav} userName={session.user.name ?? ""} userEmail={session.user.email}>
+      {children}
+    </Layout>
+  );
 }

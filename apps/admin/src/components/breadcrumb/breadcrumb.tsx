@@ -1,9 +1,17 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import clsx from "clsx";
-import ROUTES from "./_routes";
-import ss from "./breadcrumb.module.scss";
+import {
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  Breadcrumb as BreadcrumbRoot,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { BREADCRUMB_ROUTES } from "@/constants/navigation";
 
 type BreadcrumbType = {
   name: string;
@@ -21,7 +29,7 @@ export const Breadcrumb = () => {
 
     location.split("/").reduce((prev, curr, index, array) => {
       const currentPath = `${prev}/${curr}`;
-      const route = ROUTES.find((route) => route.path === currentPath);
+      const route = BREADCRUMB_ROUTES.find((route) => route.path === currentPath);
 
       const regexp = /\[(.*?)\]/g; // ex:[id]
       let realpath = route?.path || "";
@@ -62,24 +70,28 @@ export const Breadcrumb = () => {
   }
 
   return (
-    <div className={ss.container}>
-      <div className={ss.item}>
-        <Link href="/">Home</Link>
-      </div>
-      {breadcrumbs.map((breadcrumb, index) => {
-        return (
+    <BreadcrumbRoot>
+      <BreadcrumbList>
+        <BreadcrumbItem className="hidden md:block">
+          <BreadcrumbLink asChild>
+            <Link href="/">Home</Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        {breadcrumbs.map((breadcrumb, index) => (
           <React.Fragment key={index}>
-            <span className={ss.separator}>{">"}</span>
-            {breadcrumb.active ? (
-              <div className={clsx(ss.item, ss.active)}>{breadcrumb.name}</div>
-            ) : (
-              <div className={ss.item}>
-                <Link href={breadcrumb.href}>{breadcrumb.name}</Link>
-              </div>
-            )}
+            <BreadcrumbSeparator className="hidden md:block" />
+            <BreadcrumbItem>
+              {breadcrumb.active ? (
+                <BreadcrumbPage>{breadcrumb.name}</BreadcrumbPage>
+              ) : (
+                <BreadcrumbLink asChild>
+                  <Link href={breadcrumb.href}>{breadcrumb.name}</Link>
+                </BreadcrumbLink>
+              )}
+            </BreadcrumbItem>
           </React.Fragment>
-        );
-      })}
-    </div>
+        ))}
+      </BreadcrumbList>
+    </BreadcrumbRoot>
   );
 };

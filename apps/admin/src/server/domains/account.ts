@@ -23,19 +23,19 @@ export const getAccount = async (id: string): Promise<Account | null> => {
   return result;
 };
 
-export const getAccountList = async (condition: AccountListCondition): Promise<OffsetPaginator<AccountSummary>> => {
-  const total: number = await getAccountCount(condition);
-  const accounts = await getAccounts(condition);
-  const nextOffset = (condition.offset ?? 0) + (condition.limit ?? 20);
+// export const getAccountList = async (condition: AccountListCondition): Promise<OffsetPaginator<AccountSummary>> => {
+//   const total: number = await getAccountCount(condition);
+//   const accounts = await getAccounts(condition);
+//   const nextOffset = (condition.offset ?? 0) + (condition.limit ?? 20);
 
-  const ret: AccountSummary[] = accounts.map((account) => ({
-    id: account.id,
-    email: account.email,
-    name: account.name,
-    privilege: account.privilege as Privilege,
-  }));
-  return { rows: ret, offset: nextOffset, total: total };
-};
+//   const ret: AccountSummary[] = accounts.map((account) => ({
+//     id: account.id,
+//     email: account.email,
+//     name: account.name,
+//     privilege: account.privilege as Privilege,
+//   }));
+//   return { rows: ret, offset: nextOffset, total: total };
+// };
 
 export const createNewAccount = async (username: string, privilege: Privilege, name?: string): Promise<Account> => {
   const newOne = {

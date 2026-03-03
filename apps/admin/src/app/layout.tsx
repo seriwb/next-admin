@@ -2,7 +2,6 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter, Montserrat, Noto_Sans_JP, Noto_Sans_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import "simplebar-react/dist/simplebar.min.css";
 import { TITLE } from "@/constants/application";
 import "@/styles/globals.css";
 
