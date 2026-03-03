@@ -23,7 +23,7 @@ export const Condition = (props: Props) => {
         <SelectField options={[]} value={props.sort} setValue={props.setSort} />
       </div>
       <div className={ss.new}>
-        <Button label="New" shape="square" onClick={() => router.push("/system/accounts/new")} />
+        {/* <Button label="New" shape="square" onClick={() => router.push("/system/accounts/new")} /> */}
       </div>
     </div>
   );

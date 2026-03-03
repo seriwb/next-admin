@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { ACCOUNT_PRIVILEGE } from "@/constants/application";
 import { auth } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
@@ -14,6 +15,7 @@ export async function POST(request: NextRequest) {
         email: body.email,
         password: body.password,
         image: "https://example.com/image.png",
+        privilege: ACCOUNT_PRIVILEGE.superAdmin,
       },
     });
 
