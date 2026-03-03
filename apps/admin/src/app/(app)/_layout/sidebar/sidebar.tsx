@@ -3,12 +3,12 @@ import Link from "next/link";
 import clsx from "clsx";
 import SimpleBar from "simplebar-react";
 import { APP_NAME } from "@/constants/application";
-import navigation, { type Navigation } from "./_nav";
+import type { Navigation } from "./_nav";
 import ss from "./sidebar.module.scss";
 
 type Props = {
   pathname: string;
-  userPrivilege: string;
+  navigation: Navigation[];
 };
 
 export const Sidebar = (props: Props) => {
@@ -20,7 +20,7 @@ export const Sidebar = (props: Props) => {
       <div className={ss.nav}>
         <SimpleBar>
           <div className={ss.navList}>
-            {navigation?.map((item, index) => navItem(item, index, props.pathname, props.userPrivilege))}
+            {props.navigation.map((item, index) => navItem(item, index, props.pathname))}
           </div>
         </SimpleBar>
       </div>
@@ -28,11 +28,8 @@ export const Sidebar = (props: Props) => {
   );
 };
 
-const navItem = (item: Navigation, index: number, pathname: string, userPrivilege: string) => {
-  const { component, name, to, icon, items, privilege } = item;
-  if (privilege && privilege !== userPrivilege) {
-    return;
-  }
+const navItem = (item: Navigation, index: number, pathname: string) => {
+  const { component, name, to, icon, items } = item;
 
   const isActive = component === "item" && !items;
   return (

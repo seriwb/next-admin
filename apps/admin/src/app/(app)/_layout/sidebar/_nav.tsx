@@ -1,5 +1,4 @@
 import { Gauge, Users } from "lucide-react";
-import type { Privilege } from "@/types/app";
 
 export type Navigation = {
   component: "title" | "item" | "group";
@@ -7,7 +6,15 @@ export type Navigation = {
   to?: string;
   icon?: React.ReactElement;
   items?: Navigation[];
-  privilege?: Privilege;
+  privilege?: string;
+};
+
+/**
+ * セッションのprivilege値に基づいてナビゲーションをフィルタリング
+ * privilegeが未設定のアイテムは全ユーザーに表示
+ */
+export const filterNavigationByPrivilege = (nav: Navigation[], userPrivilege: string): Navigation[] => {
+  return nav.filter((item) => !item.privilege || item.privilege === userPrivilege);
 };
 
 // ここに追加した場合は、パンくずコンポーネントも編集してください

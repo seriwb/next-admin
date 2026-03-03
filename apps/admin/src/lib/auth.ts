@@ -63,7 +63,7 @@ export const auth = betterAuth({
       privilege: {
         type: "string",
         required: true,
-        defaultValue: "user",
+        defaultValue: ACCOUNT_PRIVILEGE.normal,
         returned: true,
       },
       caution: {
