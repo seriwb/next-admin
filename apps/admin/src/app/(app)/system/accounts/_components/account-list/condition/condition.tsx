@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/buttons";
+import { Button } from "@/components/button";
 import { SearchText } from "@/components/search-text";
 import { SelectField } from "@/components/select-field";
 import ss from "./condition.module.scss";

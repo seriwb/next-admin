@@ -11,7 +11,7 @@ import {
   Breadcrumb as BreadcrumbRoot,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { BREADCRUMB_ROUTES } from "@/constants/navigation";
+import { BREADCRUMB_ROUTES } from "@/app/(app)/_layout/navigation";
 
 type BreadcrumbType = {
   name: string;

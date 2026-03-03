@@ -1,10 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Breadcrumb } from "@/components/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import type { Navigation } from "@/constants/navigation";
+import { Breadcrumb } from "./breadcrumb";
+import type { Navigation } from "./navigation";
 import { ProtectedView } from "./protected-view";
 import { AppSidebar } from "./sidebar";
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { ACCOUNT_STATUS } from "@/constants/application";
-import { NAVIGATION, filterNavigationByPrivilege } from "@/constants/navigation";
 import { getAppSession } from "@/lib/auth";
 import { AppLayout as Layout } from "./_layout";
+import { NAVIGATION, filterNavigationByPrivilege } from "./_layout/navigation";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await getAppSession();

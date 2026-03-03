@@ -23,8 +23,8 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { APP_NAME } from "@/constants/application";
-import type { Navigation } from "@/constants/navigation";
 import { signOut } from "@/lib/auth-client";
+import type { Navigation } from "./navigation";
 
 // アイコン名→コンポーネントのマッピング
 const iconMap: Record<string, LucideIcon> = {
