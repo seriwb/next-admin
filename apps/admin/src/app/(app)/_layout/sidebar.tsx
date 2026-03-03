@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ChevronsUpDown, Gauge, LogOut, type LucideIcon, Shield, User, Users } from "lucide-react";
 import {
   DropdownMenu,
@@ -77,7 +76,6 @@ type Props = {
 };
 
 export const AppSidebar = ({ pathname, navigation, userName, userEmail }: Props) => {
-  const router = useRouter();
   const navGroups = buildNavGroups(navigation);
 
   const handleSignout = async () => {
@@ -86,7 +84,7 @@ export const AppSidebar = ({ pathname, navigation, userName, userEmail }: Props)
       await signOut({
         fetchOptions: {
           onSuccess: () => {
-            router.push("/signin?code=SignOut");
+            window.location.href = "/signin?code=SignOut";
           },
         },
       });
