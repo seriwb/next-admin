@@ -20,8 +20,10 @@ export type AccountSummary = {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
-    const perPage = Math.max(1, parseInt(searchParams.get("perPage") ?? String(PER_PAGE), 10));
+    const parsedPage = parseInt(searchParams.get("page") ?? "1", 10);
+    const page = Number.isFinite(parsedPage) ? Math.max(1, parsedPage) : 1;
+    const parsedPerPage = parseInt(searchParams.get("perPage") ?? String(PER_PAGE), 10);
+    const perPage = Number.isFinite(parsedPerPage) ? Math.max(1, parsedPerPage) : PER_PAGE;
     const query = searchParams.get("query") ?? "";
     const sort = searchParams.get("sort") ?? "desc";
 

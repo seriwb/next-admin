@@ -10,7 +10,8 @@ type Props = {
 
 export default async function AccountsPage({ searchParams }: Props) {
   const params = await searchParams;
-  const page = Math.max(1, parseInt(params.page ?? "1", 10));
+  const parsed = parseInt(params.page ?? "1", 10);
+  const page = Number.isFinite(parsed) ? Math.max(1, parsed) : 1;
   const query = params.query ?? "";
   const sort = params.sort ?? "desc";
 
