@@ -139,7 +139,7 @@ export const CreateAccount = () => {
                     <SelectContent>
                       <SelectItem value="Normal">Normal</SelectItem>
                       <SelectItem value="Admin">Admin</SelectItem>
-                      <SelectItem value="SuperAdmin">SuperAdmin</SelectItem>
+                      <SelectItem value="Owner">Owner</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

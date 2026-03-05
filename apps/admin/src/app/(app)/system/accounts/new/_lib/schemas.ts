@@ -10,7 +10,7 @@ export const createAccountSchema = z
       .max(128, "パスワードは128文字以下で入力してください"),
     confirmPassword: z.string().min(4).max(128),
     name: z.string().max(255, "名前は255文字以下で入力してください").optional().or(z.literal("")),
-    privilege: z.enum(["Normal", "Admin", "SuperAdmin"]),
+    privilege: z.enum(["Normal", "Admin", "Owner"]),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "パスワードが一致しません",

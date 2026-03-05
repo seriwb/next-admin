@@ -39,7 +39,7 @@ export const EditAccount = ({ account }: Props) => {
     mode: "onBlur",
     defaultValues: {
       name: account.name ?? "",
-      privilege: account.privilege as "Normal" | "Admin" | "SuperAdmin",
+      privilege: account.privilege as "Normal" | "Admin" | "Owner",
       status: account.status as "active" | "inactive" | "suspended",
       caution: account.caution ?? "",
     },
@@ -131,7 +131,7 @@ export const EditAccount = ({ account }: Props) => {
                       <SelectContent>
                         <SelectItem value="Normal">Normal</SelectItem>
                         <SelectItem value="Admin">Admin</SelectItem>
-                        <SelectItem value="SuperAdmin">SuperAdmin</SelectItem>
+                        <SelectItem value="Owner">Owner</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />

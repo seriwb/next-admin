@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
         email: body.email,
         password: body.password,
         image: "https://example.com/image.png",
-        privilege: ACCOUNT_PRIVILEGE.superAdmin,
+        privilege: ACCOUNT_PRIVILEGE.owner,
       },
     });
 

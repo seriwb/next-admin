@@ -25,7 +25,7 @@ type Props = {
 
 const getPrivilegeBadgeVariant = (privilege: string): "default" | "secondary" | "destructive" | "outline" => {
   switch (privilege) {
-    case "SuperAdmin":
+    case "Owner":
       return "destructive";
     case "Admin":
       return "default";

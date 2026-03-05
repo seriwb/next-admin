@@ -34,14 +34,14 @@ export const NAVIGATIONS: Navigation[] = [
   {
     component: "title",
     name: "System management",
-    privilege: "SuperAdmin",
+    privilege: "Owner",
   },
   {
     component: "item",
     name: "Accounts",
     to: "/system/accounts",
     icon: "Users",
-    privilege: "SuperAdmin",
+    privilege: "Owner",
   },
 ];
 
