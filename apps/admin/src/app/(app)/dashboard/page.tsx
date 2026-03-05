@@ -1,7 +1,15 @@
-"use client";
+import { RecentAccounts } from "./_components/recent-accounts";
+import { getRecentAccountsAction } from "./_lib/actions";
 
-const DashboardPage = () => {
-  return <>todo</>;
-};
+export const dynamic = "force-dynamic";
 
-export default DashboardPage;
+export default async function DashboardPage() {
+  const result = await getRecentAccountsAction();
+  const accounts = result.success ? (result.data ?? []) : [];
+
+  return (
+    <div className="flex flex-col gap-6 p-6">
+      <RecentAccounts accounts={accounts} />
+    </div>
+  );
+}
