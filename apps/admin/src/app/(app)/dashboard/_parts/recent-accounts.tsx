@@ -7,6 +7,7 @@ import dayjs from "@/lib/utils/date";
 
 type Props = {
   accounts: DashboardAccountSummary[];
+  totalCount: number;
 };
 
 const getPrivilegeBadgeVariant = (privilege: string): "default" | "secondary" | "destructive" | "outline" => {
@@ -20,13 +21,13 @@ const getPrivilegeBadgeVariant = (privilege: string): "default" | "secondary" | 
   }
 };
 
-export const RecentAccounts = ({ accounts }: Props) => {
+export const RecentAccounts = ({ accounts, totalCount }: Props) => {
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center gap-2">
           <CardTitle>今月追加されたメンバー</CardTitle>
-          <Badge variant="secondary">{accounts.length}人</Badge>
+          <Badge variant="secondary">{totalCount}人</Badge>
         </div>
       </CardHeader>
       <CardContent>
