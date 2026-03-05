@@ -1,26 +1,13 @@
 import { z } from "zod";
+import { passwordMatchRefine, passwordSchema, requiredEmailSchema } from "@/constants/schemas";
 
 // 初回ユーザー登録フォーム用スキーマ（confirmPasswordを含む）
 export const firstUserFormSchema = z
   .object({
-    username: z
-      .email("IDはメールアドレス形式で入力してください。")
-      .min(1, "このフィールドは必須です。")
-      .max(128, "IDは128文字以内で入力してください。"),
-    password: z
-      .string()
-      .min(1, "このフィールドは必須です。")
-      .min(4, "パスワードは4文字以上で入力してください。")
-      .max(128, "パスワードは128文字以内で入力してください。"),
-    confirmPassword: z
-      .string()
-      .min(1, "このフィールドは必須です。")
-      .min(4, "パスワードは4文字以上で入力してください。")
-      .max(128, "パスワードは128文字以内で入力してください。"),
+    username: requiredEmailSchema,
+    password: z.string().min(1, "このフィールドは必須です。").pipe(passwordSchema),
+    confirmPassword: z.string().min(1, "このフィールドは必須です。").pipe(passwordSchema),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "パスワードが一致しません。",
-    path: ["confirmPassword"],
-  });
+  .refine(passwordMatchRefine.check, passwordMatchRefine.params);
 
 export type FirstUserFormInput = z.infer<typeof firstUserFormSchema>;

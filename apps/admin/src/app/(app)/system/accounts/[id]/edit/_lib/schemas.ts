@@ -1,11 +1,17 @@
 import { z } from "zod";
+import {
+  accountCautionSchema,
+  accountNameSchema,
+  accountPrivilegeSchema,
+  accountStatusSchema,
+} from "@/constants/schemas";
 
 // アカウント編集用スキーマ
 export const editAccountSchema = z.object({
-  name: z.string().max(255, "名前は255文字以下で入力してください").optional().or(z.literal("")),
-  privilege: z.enum(["Normal", "Admin", "Owner"]),
-  status: z.enum(["active", "inactive", "suspended"]),
-  caution: z.string().max(500, "注意事項は500文字以下で入力してください").optional().or(z.literal("")),
+  name: accountNameSchema,
+  privilege: accountPrivilegeSchema,
+  status: accountStatusSchema,
+  caution: accountCautionSchema,
 });
 
 export type EditAccountInput = z.infer<typeof editAccountSchema>;
