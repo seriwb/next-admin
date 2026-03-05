@@ -1,18 +1,13 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { PER_PAGE } from "@/constants/application";
-import { auth, getAppSession } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 // GET: アカウント一覧取得
 export async function GET(request: NextRequest) {
-  const session = await getAppSession();
-  if (!session) {
-    return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
-  }
-
   try {
     const { searchParams } = new URL(request.url);
     const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
@@ -53,11 +48,6 @@ export async function GET(request: NextRequest) {
 
 // POST: アカウント新規作成
 export async function POST(request: NextRequest) {
-  const session = await getAppSession();
-  if (!session) {
-    return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
-  }
-
   try {
     const body = (await request.json()) as {
       email: string;

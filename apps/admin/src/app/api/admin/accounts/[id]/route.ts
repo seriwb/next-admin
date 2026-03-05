@@ -1,17 +1,11 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { getAppSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 // GET: アカウント詳細取得
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const session = await getAppSession();
-  if (!session) {
-    return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
-  }
-
   try {
     const { id } = await params;
     const account = await prisma.account.findUnique({
@@ -41,11 +35,6 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 
 // PUT: アカウント更新
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const session = await getAppSession();
-  if (!session) {
-    return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
-  }
-
   try {
     const { id } = await params;
     const body = (await request.json()) as {
@@ -74,11 +63,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
 // DELETE: アカウント削除（BaSession, BaAccount はCascadeで自動削除）
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const session = await getAppSession();
-  if (!session) {
-    return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
-  }
-
   try {
     const { id } = await params;
     await prisma.account.delete({ where: { id } });

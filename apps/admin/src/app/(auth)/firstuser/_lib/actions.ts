@@ -7,9 +7,9 @@ import { type FirstUserFormInput, firstUserFormSchema } from "./schemas";
 
 export const checkActiveAccountExist = async (): Promise<ServerResult<boolean>> => {
   try {
-    const result = await serverGet<ServerResult<{ exists: boolean }>>("/api/accounts/check-active-account-exist");
+    const result = await serverGet<ServerResult<boolean>>("/api/accounts/check-active-account-exist");
     if (result.success) {
-      return { success: true, data: result.data?.exists ?? false };
+      return { success: true, data: result.data ?? false };
     } else {
       console.error(result.error);
       return { success: false, error: result.error };
