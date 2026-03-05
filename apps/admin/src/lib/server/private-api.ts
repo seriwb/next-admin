@@ -12,7 +12,7 @@ const serverFetchWithTimeout = async (
   body?: string,
   timeout = 10000
 ): Promise<Response> => {
-  const fullUrl = url.startsWith("http") ? url : `${API_BASE_URL}${url}`;
+  const fullUrl = `${API_BASE_URL}${url}`;
 
   const session = await getAppSession();
   if (!session) {
