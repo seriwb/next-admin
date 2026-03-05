@@ -3,7 +3,7 @@
 import z from "zod";
 import { serverPost } from "@/lib/server/private-api";
 import type { ServerResult } from "@/types/app";
-import { type CreateAccountInput, createAccountSchema } from "./schemas";
+import { type CreateAccountInput, createAccountSchema } from "./lib";
 
 // アカウント新規作成
 export const createAccountAction = async (input: CreateAccountInput): Promise<ServerResult> => {

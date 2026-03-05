@@ -1,8 +1,8 @@
 "use server";
 
+import type { AccountSummary } from "@/app/api/admin/accounts/route";
 import { serverDelete, serverGet } from "@/lib/server/private-api";
 import type { ServerResult } from "@/types/app";
-import type { AccountSummary } from "./types";
 
 type GetAccountListParams = {
   page?: number;

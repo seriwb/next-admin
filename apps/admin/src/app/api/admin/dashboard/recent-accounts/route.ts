@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import dayjs from "@/lib/utils/date";
+import type { ServerResult } from "@/types/app";
+import type { AccountSummary } from "../../accounts/route";
 
 export const dynamic = "force-dynamic";
+
+export type DashboardAccountSummary = AccountSummary;
 
 // GET: 今月作成されたアカウント一覧取得
 export async function GET() {
@@ -24,7 +28,7 @@ export async function GET() {
       },
     });
 
-    return NextResponse.json({ success: true, data: accounts });
+    return NextResponse.json<ServerResult<DashboardAccountSummary[]>>({ success: true, data: accounts });
   } catch (error) {
     console.error("Recent accounts GET API error:", error);
     return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

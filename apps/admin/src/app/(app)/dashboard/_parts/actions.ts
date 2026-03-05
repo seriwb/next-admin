@@ -1,6 +1,6 @@
 "use server";
 
-import type { AccountSummary } from "@/app/(app)/system/accounts/_lib/types";
+import type { AccountSummary } from "@/app/api/admin/accounts/route";
 import { serverGet } from "@/lib/server/private-api";
 import type { ServerResult } from "@/types/app";
 

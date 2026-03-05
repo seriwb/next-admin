@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { EditAccount } from "./_components/edit-account";
-import { getAccountAction } from "./_lib/actions";
+import { getAccountAction } from "./_parts/actions";
+import { EditAccount } from "./_parts/edit-account";
 
 export const dynamic = "force-dynamic";
 

@@ -1,8 +1,15 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import type { ServerResult } from "@/types/app";
+import type { AccountSummary } from "../route";
 
 export const dynamic = "force-dynamic";
+
+export type AccountDetail = AccountSummary & {
+  caution: string | null;
+  updatedAt: Date;
+};
 
 // GET: アカウント詳細取得
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -26,7 +33,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ success: false, error: "Not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ success: true, data: account });
+    return NextResponse.json<ServerResult<AccountDetail>>({ success: true, data: account });
   } catch (error) {
     console.error("Account GET API error:", error);
     return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

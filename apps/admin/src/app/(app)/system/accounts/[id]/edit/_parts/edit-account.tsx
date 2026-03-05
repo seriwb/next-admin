@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import type { AccountDetail } from "@/app/api/admin/accounts/[id]/route";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -20,9 +21,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import type { AccountDetail } from "../../../_lib/types";
-import { deleteAccountAction, updateAccountAction } from "../_lib/actions";
-import { type EditAccountInput, editAccountSchema } from "../_lib/schemas";
+import { deleteAccountAction, updateAccountAction } from "./actions";
+import { type EditAccountInput, editAccountSchema } from "./lib";
 
 type Props = {
   account: AccountDetail;

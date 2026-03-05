@@ -1,10 +1,10 @@
 "use server";
 
 import z from "zod";
+import type { AccountDetail } from "@/app/api/admin/accounts/[id]/route";
 import { serverDelete, serverGet, serverPut } from "@/lib/server/private-api";
 import type { ServerResult } from "@/types/app";
-import type { AccountDetail } from "../../../_lib/types";
-import { type EditAccountInput, editAccountSchema } from "./schemas";
+import { type EditAccountInput, editAccountSchema } from "./lib";
 
 // アカウント詳細取得
 export const getAccountAction = async (id: string): Promise<ServerResult<AccountDetail>> => {

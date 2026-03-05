@@ -1,12 +1,12 @@
 import Link from "next/link";
-import type { AccountSummary } from "@/app/(app)/system/accounts/_lib/types";
+import type { DashboardAccountSummary } from "@/app/api/admin/dashboard/recent-accounts/route";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import dayjs from "@/lib/utils/date";
 
 type Props = {
-  accounts: AccountSummary[];
+  accounts: DashboardAccountSummary[];
 };
 
 const getPrivilegeBadgeVariant = (privilege: string): "default" | "secondary" | "destructive" | "outline" => {

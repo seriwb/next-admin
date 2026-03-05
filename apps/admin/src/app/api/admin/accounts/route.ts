@@ -3,8 +3,18 @@ import { NextResponse } from "next/server";
 import { PER_PAGE } from "@/constants/application";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import type { ServerResult } from "@/types/app";
 
 export const dynamic = "force-dynamic";
+
+export type AccountSummary = {
+  id: string;
+  email: string;
+  name: string | null;
+  privilege: string;
+  status: string;
+  createdAt: Date;
+};
 
 // GET: アカウント一覧取得
 export async function GET(request: NextRequest) {
@@ -39,7 +49,10 @@ export async function GET(request: NextRequest) {
       prisma.account.count({ where }),
     ]);
 
-    return NextResponse.json({ success: true, data: { rows, total } });
+    return NextResponse.json<ServerResult<{ rows: AccountSummary[]; total: number }>>({
+      success: true,
+      data: { rows, total },
+    });
   } catch (error) {
     console.error("Accounts GET API error:", error);
     return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

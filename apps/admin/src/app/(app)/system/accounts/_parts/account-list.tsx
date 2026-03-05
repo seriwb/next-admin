@@ -4,15 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import type { AccountSummary } from "@/app/api/admin/accounts/route";
 import { Pagination } from "@/components/pagination";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PER_PAGE } from "@/constants/application";
 import dayjs from "@/lib/utils/date";
-import { deleteAccountAction } from "../_lib/actions";
-import type { AccountSummary } from "../_lib/types";
 import { AccountSearch } from "./account-search";
+import { deleteAccountAction } from "./actions";
 import { DeleteAccountDialog } from "./delete-account-dialog";
 
 type Props = {

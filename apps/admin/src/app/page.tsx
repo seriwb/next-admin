@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ACCOUNT_STATUS, DEFAULT_VIEW } from "@/constants/application";
 import { useSession } from "@/lib/auth-client";
 import { AuthLayout } from "./(auth)/_layout/auth-layout";
-import { SignIn } from "./(auth)/signin/_components/signin";
+import { SignIn } from "./(auth)/signin/_parts/signin";
 
 const Page = () => {
   const router = useRouter();

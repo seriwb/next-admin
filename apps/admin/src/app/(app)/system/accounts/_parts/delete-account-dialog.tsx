@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
+import type { AccountSummary } from "@/app/api/admin/accounts/route";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import type { AccountSummary } from "../_lib/types";
 
 type Props = {
   account: AccountSummary | null;

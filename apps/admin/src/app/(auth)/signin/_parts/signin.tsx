@@ -10,7 +10,7 @@ import { TextInput } from "@/components/forms";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { signIn } from "@/lib/auth-client";
-import { ErrorMessages } from "../_lib/constants";
+import { ErrorMessages } from "./lib";
 
 type SignInForm = {
   username: string;

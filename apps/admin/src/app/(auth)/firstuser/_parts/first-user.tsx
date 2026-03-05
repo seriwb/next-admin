@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signIn } from "@/lib/auth-client";
-import { createNewAccount } from "../_lib/actions";
-import { type FirstUserFormInput, firstUserFormSchema } from "../_lib/schemas";
+import { createNewAccount } from "./actions";
+import { type FirstUserFormInput, firstUserFormSchema } from "./lib";
 
 export const FirstUser = () => {
   const router = useRouter();

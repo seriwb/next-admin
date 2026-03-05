@@ -1,6 +1,6 @@
 import { PER_PAGE } from "@/constants/application";
-import { AccountList } from "./_components/account-list";
-import { getAccountListAction } from "./_lib/actions";
+import { AccountList } from "./_parts/account-list";
+import { getAccountListAction } from "./_parts/actions";
 
 export const dynamic = "force-dynamic";
 

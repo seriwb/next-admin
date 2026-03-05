@@ -1,5 +1,5 @@
-import { RecentAccounts } from "./_components/recent-accounts";
-import { getRecentAccountsAction } from "./_lib/actions";
+import { getRecentAccountsAction } from "./_parts/actions";
+import { RecentAccounts } from "./_parts/recent-accounts";
 
 export const dynamic = "force-dynamic";
 

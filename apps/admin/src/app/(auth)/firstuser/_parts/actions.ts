@@ -3,7 +3,7 @@
 import z from "zod";
 import { serverGet, serverPost } from "@/lib/server/public-api";
 import type { ServerResult } from "@/types/app";
-import { type FirstUserFormInput, firstUserFormSchema } from "./schemas";
+import { type FirstUserFormInput, firstUserFormSchema } from "./lib";
 
 export const checkActiveAccountExist = async (): Promise<ServerResult<boolean>> => {
   try {
