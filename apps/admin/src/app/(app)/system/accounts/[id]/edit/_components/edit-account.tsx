@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { TimestampField } from "@/components/timestamp-field";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -210,7 +209,6 @@ export const EditAccount = ({ account }: Props) => {
               </div>
             </form>
           </Form>
-          <TimestampField createdAt={new Date(account.createdAt)} updatedAt={new Date(account.updatedAt)} />
         </CardContent>
       </Card>
 

@@ -11,8 +11,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { createAccountAction } from "../../_lib/actions";
-import { type CreateAccountInput, createAccountSchema } from "../../_lib/schemas";
+import { createAccountAction } from "../_lib/actions";
+import { type CreateAccountInput, createAccountSchema } from "../_lib/schemas";
 
 export const CreateAccount = () => {
   const router = useRouter();
