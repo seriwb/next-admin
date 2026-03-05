@@ -1,4 +1,5 @@
 import { PER_PAGE } from "@/constants/application";
+import { getAppSession } from "@/lib/auth";
 import { AccountList } from "./_parts/account-list";
 import { getAccountListAction } from "./_parts/actions";
 
@@ -15,9 +16,12 @@ export default async function AccountsPage({ searchParams }: Props) {
   const query = params.query ?? "";
   const sort = params.sort ?? "desc";
 
+  const session = await getAppSession();
+  const currentUserId = session?.user.id ?? "";
+
   const result = await getAccountListAction({ page, perPage: PER_PAGE, query, sort });
   const data = result.success ? (result.data?.rows ?? []) : [];
   const total = result.success ? (result.data?.total ?? 0) : 0;
 
-  return <AccountList data={data} total={total} page={page} query={query} sort={sort} />;
+  return <AccountList data={data} total={total} page={page} query={query} sort={sort} currentUserId={currentUserId} />;
 }

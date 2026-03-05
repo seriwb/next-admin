@@ -21,6 +21,7 @@ type Props = {
   page: number;
   query: string;
   sort: string;
+  currentUserId: string;
 };
 
 const getPrivilegeBadgeVariant = (privilege: string): "default" | "secondary" | "destructive" | "outline" => {
@@ -45,7 +46,7 @@ const getStatusBadgeVariant = (status: string): "default" | "secondary" | "destr
   }
 };
 
-export const AccountList = ({ data, total, page, query, sort }: Props) => {
+export const AccountList = ({ data, total, page, query, sort, currentUserId }: Props) => {
   const router = useRouter();
   const [deleteTarget, setDeleteTarget] = useState<AccountSummary | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -121,9 +122,11 @@ export const AccountList = ({ data, total, page, query, sort }: Props) => {
                     {dayjs(account.createdAt).tz().format("YYYY/MM/DD")}
                   </TableCell>
                   <TableCell>
-                    <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(account)}>
-                      削除
-                    </Button>
+                    {account.id !== currentUserId && (
+                      <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(account)}>
+                        削除
+                      </Button>
+                    )}
                   </TableCell>
                 </TableRow>
               ))

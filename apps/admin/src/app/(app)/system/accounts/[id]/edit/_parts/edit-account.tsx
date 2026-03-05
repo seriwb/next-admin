@@ -26,9 +26,10 @@ import { type EditAccountInput, editAccountSchema } from "./lib";
 
 type Props = {
   account: AccountDetail;
+  currentUserId: string;
 };
 
-export const EditAccount = ({ account }: Props) => {
+export const EditAccount = ({ account, currentUserId }: Props) => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -184,14 +185,16 @@ export const EditAccount = ({ account }: Props) => {
               {errorMessage && <p className="text-sm font-medium text-destructive">{errorMessage}</p>}
 
               <div className="flex justify-between">
-                <Button
-                  type="button"
-                  variant="destructive"
-                  onClick={() => setShowDeleteDialog(true)}
-                  disabled={isSubmitting}
-                >
-                  削除する
-                </Button>
+                {account.id !== currentUserId && (
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    onClick={() => setShowDeleteDialog(true)}
+                    disabled={isSubmitting}
+                  >
+                    削除する
+                  </Button>
+                )}
                 <div className="flex gap-2">
                   <Button
                     type="button"

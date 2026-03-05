@@ -69,9 +69,14 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 }
 
 // DELETE: アカウント削除（BaSession, BaAccount はCascadeで自動削除）
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
+    // 自己削除防止: ログイン中のユーザーは自分自身を削除できない
+    const currentUserId = request.headers.get("X-User-Id");
+    if (currentUserId && currentUserId === id) {
+      return NextResponse.json({ success: false, error: "自分自身のアカウントは削除できません" }, { status: 400 });
+    }
     await prisma.account.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch (error) {
