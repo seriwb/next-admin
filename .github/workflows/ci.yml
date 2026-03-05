@@ -83,5 +83,5 @@ jobs:
       - name: Build
         env:
           DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
-          BETTER_AUTH_SECRET: "dummy_token"
+          BETTER_AUTH_SECRET: "dummy_token_p0WBNW62p4EpbUF6HxOzmRYhSbSc98LjPaD8umwduY8="
         run: yarn admin:build
