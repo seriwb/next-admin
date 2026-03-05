@@ -18,7 +18,7 @@ export const filterNavigationByPrivilege = (nav: Navigation[], userPrivilege: st
   return nav.filter((item) => !item.privilege || item.privilege === userPrivilege);
 };
 
-export const NAVIGATION: Navigation[] = [
+export const NAVIGATIONS: Navigation[] = [
   {
     component: "item",
     name: "Dashboard",
@@ -34,14 +34,14 @@ export const NAVIGATION: Navigation[] = [
   {
     component: "title",
     name: "System management",
-    privilege: "SuperAdmin",
+    privilege: "Owner",
   },
   {
     component: "item",
     name: "Accounts",
     to: "/system/accounts",
     icon: "Users",
-    privilege: "SuperAdmin",
+    privilege: "Owner",
   },
 ];
 

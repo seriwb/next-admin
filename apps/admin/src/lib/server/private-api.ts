@@ -1,4 +1,5 @@
 import "server-only";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getAppSession } from "@/lib/auth";
 import type { FetchError } from "@/types/app";
@@ -11,7 +12,7 @@ const serverFetchWithTimeout = async (
   body?: string,
   timeout = 10000
 ): Promise<Response> => {
-  const fullUrl = url.startsWith("http") ? url : `${API_BASE_URL}${url}`;
+  const fullUrl = `${API_BASE_URL}${url}`;
 
   const session = await getAppSession();
   if (!session) {
@@ -27,6 +28,7 @@ const serverFetchWithTimeout = async (
   const headers: HeadersInit = {
     Accept: "application/json",
     "X-User-Id": session.user.id,
+    Cookie: (await cookies()).toString(),
   };
 
   if (body) {

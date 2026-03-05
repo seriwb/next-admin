@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "@/components/link";
-import { FirstUser } from "./_components/first-user";
-import { checkActiveAccountExist } from "./_lib/actions";
+import { checkActiveAccountExist } from "./_parts/actions";
+import { FirstUser } from "./_parts/first-user";
 
-export const fetchCache = "force-no-store";
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "管理アカウント登録",

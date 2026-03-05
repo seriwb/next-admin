@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { BREADCRUMB_ROUTES } from "@/app/(app)/_layout/navigation";
 import {
   BreadcrumbItem,
   BreadcrumbLink,
@@ -11,46 +12,52 @@ import {
   Breadcrumb as BreadcrumbRoot,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { BREADCRUMB_ROUTES } from "@/app/(app)/_layout/navigation";
 
 type BreadcrumbType = {
   name: string;
   href: string;
   active: boolean;
+  disabled: boolean;
+};
+
+// ルートパスの [xxx] を正規表現のキャプチャグループに変換する
+const pathToRegex = (routePath: string): RegExp => {
+  const pattern = routePath.replace(/\[([^\]]+)\]/g, "([^/]+)");
+  return new RegExp(`^${pattern}$`);
 };
 
 export const Breadcrumb = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbType[]>([]);
 
   const getBreadcrumbs = (location: string): BreadcrumbType[] => {
     const results: BreadcrumbType[] = [];
 
     location.split("/").reduce((prev, curr, index, array) => {
       const currentPath = `${prev}/${curr}`;
-      const route = BREADCRUMB_ROUTES.find((route) => route.path === currentPath);
+      // [id] のような動的セグメントを含むルートもマッチできるよう正規表現で比較する
+      const route = BREADCRUMB_ROUTES.find((route) => pathToRegex(route.path).test(currentPath));
 
-      const regexp = /\[(.*?)\]/g; // ex:[id]
-      let realpath = route?.path || "";
-      const param = realpath.match(regexp);
-      if (param) {
-        const regexp2 = /\[(.*?)\]/; // ex:id
-        for (const bracketValue of param) {
-          const id = regexp2.exec(bracketValue)![1];
-          const idValue = searchParams.get(id);
-          if (idValue) {
-            realpath = realpath.replace(bracketValue, idValue);
+      // route.path の動的セグメント [xxx] を currentPath の実際の値で置換してリンクを生成する
+      let realpath = currentPath;
+      if (route?.path) {
+        const routeSegments = route.path.split("/");
+        const currentSegments = currentPath.split("/");
+        realpath = route.path;
+        routeSegments.forEach((seg, i) => {
+          if (/\[.*?\]/.test(seg)) {
+            realpath = realpath.replace(seg, currentSegments[i]);
           }
-        }
+        });
       }
 
       if (route?.name) {
-        const active: boolean = route?.disable || index + 1 === array.length ? true : false;
+        const disabled: boolean = route.disable === true;
+        const active: boolean = !disabled && index + 1 === array.length;
         results.push({
-          href: realpath || currentPath,
+          href: realpath,
           name: route.name,
-          active: active,
+          active,
+          disabled,
         });
       }
       return currentPath;
@@ -59,15 +66,7 @@ export const Breadcrumb = () => {
     return results;
   };
 
-  useEffect(() => {
-    const newBreadcrumbs = getBreadcrumbs(pathname);
-    setBreadcrumbs(newBreadcrumbs);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
-
-  if (!breadcrumbs) {
-    return null;
-  }
+  const breadcrumbs = useMemo(() => getBreadcrumbs(pathname), [pathname]);
 
   return (
     <BreadcrumbRoot>
@@ -83,6 +82,8 @@ export const Breadcrumb = () => {
             <BreadcrumbItem>
               {breadcrumb.active ? (
                 <BreadcrumbPage>{breadcrumb.name}</BreadcrumbPage>
+              ) : breadcrumb.disabled ? (
+                <span className="transition-colors">{breadcrumb.name}</span>
               ) : (
                 <BreadcrumbLink asChild>
                   <Link href={breadcrumb.href}>{breadcrumb.name}</Link>

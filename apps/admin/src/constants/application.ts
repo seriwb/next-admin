@@ -6,7 +6,7 @@ export const DEFAULT_VIEW = "/dashboard";
 export const ACCOUNT_PRIVILEGE = {
   normal: "Normal",
   admin: "Admin",
-  superAdmin: "SuperAdmin",
+  owner: "Owner",
 };
 
 export const ACCOUNT_STATUS = {

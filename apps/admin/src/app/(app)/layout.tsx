@@ -1,8 +1,8 @@
 import React from "react";
 import { ACCOUNT_STATUS } from "@/constants/application";
 import { getAppSession } from "@/lib/auth";
-import { AppLayout as Layout } from "./_layout";
-import { NAVIGATION, filterNavigationByPrivilege } from "./_layout/navigation";
+import { AppLayout as Layout } from "./_layout/app-layout";
+import { NAVIGATIONS, filterNavigationByPrivilege } from "./_layout/navigation";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await getAppSession();
@@ -11,7 +11,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     return null;
   }
 
-  const filteredNav = filterNavigationByPrivilege(NAVIGATION, session.user.privilege);
+  const filteredNav = filterNavigationByPrivilege(NAVIGATIONS, session.user.privilege);
 
   return (
     <Layout navigation={filteredNav} userName={session.user.name ?? ""} userEmail={session.user.email}>
