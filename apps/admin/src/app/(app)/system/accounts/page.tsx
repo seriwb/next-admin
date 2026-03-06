@@ -16,10 +16,11 @@ export default async function AccountsPage({ searchParams }: Props) {
   const query = params.query ?? "";
   const sort = params.sort ?? "desc";
 
-  const session = await getAppSession();
+  const [session, result] = await Promise.all([
+    getAppSession(),
+    getAccountListAction({ page, perPage: PER_PAGE, query, sort }),
+  ]);
   const currentUserId = session?.user.id ?? "";
-
-  const result = await getAccountListAction({ page, perPage: PER_PAGE, query, sort });
   const data = result.success ? (result.data?.rows ?? []) : [];
   const total = result.success ? (result.data?.total ?? 0) : 0;
 
