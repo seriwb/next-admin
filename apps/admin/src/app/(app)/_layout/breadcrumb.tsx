@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useMemo } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BREADCRUMB_ROUTES } from "@/app/(app)/_layout/navigation";
+import { Link } from "@/components/link";
 import {
   BreadcrumbItem,
   BreadcrumbLink,

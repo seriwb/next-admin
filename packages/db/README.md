@@ -1,20 +1,31 @@
 # DB
 
-## Environments
+データベース管理パッケージ (`@next-admin/db`)
 
-Set following environments at applications.
+## セットアップ手順
 
-- DATABASE_URL
+### 1. 環境変数の設定
 
+`.env.template` を元に `.env` を作成する。
 
-## Connect database
-
+```bash
+cp .env.template .env
 ```
-psql postgresql://admin:admin@127.0.0.1:5432/next_admin
+
+### 2. Prisma クライアント生成
+
+```bash
+yarn db:generate
 ```
 
-## Create migration
+### 3. マイグレーション実行
 
+```bash
+yarn db:deploy
 ```
-yarn run prisma migrate dev --name first-migration
+
+## データベース接続
+
+```bash
+psql postgresql://admin:admin@127.0.0.1:55432/next_admin
 ```

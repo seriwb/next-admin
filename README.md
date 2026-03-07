@@ -1,21 +1,32 @@
-# admin application template
+# next-admin
 
-Admin application template using Next.js 16 (App Router) with yarn workspaces monorepo structure.
+Next.jsを使用した管理画面アプリケーションのテンプレートプロジェクトで、  
+Yarn Workspacesによるモノレポ構成になっています。
 
-## base libraries
-- Next.js v16
-- Better Auth
-- TailwindCSS
-- prisma
-- yarn workspace
-- quill
-- resend
+## Base Libraries
 
-### infrastructures
+- Next.js 16
+- Better Auth 1.4
+- TailwindCSS 7
+- prisma 4
+- yarn 4
+
+### Infrastructures
+
 - docker compose
-- PostgreSQL
-- mailhog
-- localstack
-  - S3
-  - SES
+- PostgreSQL 18
+- oven(SES)
 
+
+## リポジトリ構成
+
+```
+next-admin/
+├── apps/
+│   ├── admin/          # 管理画面アプリケーション (Next.js)
+│   └── web/            # サービスアプリケーション用フレイスホルダー
+├── packages/
+│   └── db/             # マイグレーション管理 (Prisma)
+├── infra/              # インフラ設定
+└── docker-compose.yml  # ローカル開発用インフラ管理
+```

@@ -3,7 +3,7 @@ services:
     image: postgres:18.1
     container_name: next-admin_postgres
     ports:
-      - 5432:5432
+      - 55432:5432
     volumes:
       - ./infra/postgres/sql/:/docker-entrypoint-initdb.d/
       - postgres-data:/var/lib/postgres
@@ -12,31 +12,12 @@ services:
       POSTGRES_PASSWORD: "admin"
     networks:
       - next-admin-network
-
-  localstack:
-    image: localstack/localstack:4.11.1
-    container_name: next-admin_localstack
+  ses:
+    image: oven/bun:1
+    container_name: next-admin_ses
     ports:
-      - "4566:4566"            # LocalStack Gateway
-      - "4510-4559:4510-4559"  # external services port range
-    environment:
-      - DEBUG=${DEBUG-}
-      - PERSISTENCE=${PERSISTENCE-}
-      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
-      - DOCKER_HOST=unix:///var/run/docker.sock
-    volumes:
-      - localstack-volume:/var/lib/localstack
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    networks:
-      - next-admin-network
-
-  mailhog:
-    image: mailhog/mailhog:latest
-    platform: linux/amd64
-    container_name: next-admin_mailhog
-    ports:
-      - "8025:8025"
-      - "1025:1025"
+      - 58005:8005
+    command: bunx aws-ses-v2-local --host=0.0.0.0
     networks:
       - next-admin-network
 

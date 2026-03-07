@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -21,6 +20,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useNavigationRouter } from "@/hooks/use-navigation-router";
 import { deleteAccountAction, updateAccountAction } from "./actions";
 import { type EditAccountInput, editAccountSchema } from "./lib";
 
@@ -30,7 +30,7 @@ type Props = {
 };
 
 export const EditAccount = ({ account, currentUserId }: Props) => {
-  const router = useRouter();
+  const { push } = useNavigationRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -54,7 +54,7 @@ export const EditAccount = ({ account, currentUserId }: Props) => {
       const result = await updateAccountAction(account.id, data);
       if (result.success) {
         toast.success("アカウントを更新しました");
-        router.push("/system/accounts");
+        push("/system/accounts");
       } else {
         setErrorMessage(result.error || "");
         if (result.fieldErrors) {
@@ -75,7 +75,7 @@ export const EditAccount = ({ account, currentUserId }: Props) => {
       const result = await deleteAccountAction(account.id);
       if (result.success) {
         toast.success("アカウントを削除しました");
-        router.push("/system/accounts");
+        push("/system/accounts");
       } else {
         toast.error(result.error || "削除に失敗しました");
         setShowDeleteDialog(false);
@@ -199,7 +199,7 @@ export const EditAccount = ({ account, currentUserId }: Props) => {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => router.push("/system/accounts")}
+                    onClick={() => push("/system/accounts")}
                     disabled={isSubmitting}
                   >
                     キャンセル

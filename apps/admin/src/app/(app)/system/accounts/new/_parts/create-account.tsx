@@ -1,21 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useNavigationRouter } from "@/hooks/use-navigation-router";
 import { createAccountAction } from "./actions";
 import { type CreateAccountInput, createAccountSchema } from "./lib";
 
 export const CreateAccount = () => {
-  const router = useRouter();
+  const { push, back } = useNavigationRouter();
   const [errorMessage, setErrorMessage] = useState("");
 
   const form = useForm<CreateAccountInput>({
@@ -27,6 +28,7 @@ export const CreateAccount = () => {
       confirmPassword: "",
       name: "",
       privilege: "Normal",
+      sendInvite: false,
     },
   });
   const { isSubmitting } = form.formState;
@@ -37,7 +39,7 @@ export const CreateAccount = () => {
       const result = await createAccountAction(data);
       if (result.success) {
         toast.success("アカウントを作成しました");
-        router.push("/system/accounts");
+        push("/system/accounts");
       } else {
         setErrorMessage(result.error || "");
         if (result.fieldErrors) {
@@ -146,9 +148,24 @@ export const CreateAccount = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="sendInvite"
+              render={({ field }) => (
+                <FormItem className="flex items-center gap-2">
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} id="sendInvite" />
+                  </FormControl>
+                  <FormLabel htmlFor="sendInvite" className="cursor-pointer">
+                    招待メールを送信する
+                  </FormLabel>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             {errorMessage && <p className="text-sm font-medium text-destructive">{errorMessage}</p>}
             <div className="flex gap-2">
-              <Button type="button" variant="outline" onClick={() => router.back()} disabled={isSubmitting}>
+              <Button type="button" variant="outline" onClick={() => back()} disabled={isSubmitting}>
                 キャンセル
               </Button>
               <Button type="submit" disabled={isSubmitting}>

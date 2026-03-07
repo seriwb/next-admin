@@ -1,6 +1,6 @@
 // TODO: Change these constants.
-export const TITLE = "Application Name";
-export const APP_NAME = "Application Name";
+export const TITLE = "Next Admin";
+export const APP_NAME = "Next Admin";
 export const DEFAULT_VIEW = "/dashboard";
 
 export const ACCOUNT_PRIVILEGE = {

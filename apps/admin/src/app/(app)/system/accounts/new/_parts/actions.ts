@@ -22,6 +22,7 @@ export const createAccountAction = async (input: CreateAccountInput): Promise<Se
       password: parsed.data.password,
       name: parsed.data.name || undefined,
       privilege: parsed.data.privilege,
+      sendInvite: parsed.data.sendInvite,
     });
     return result;
   } catch (error) {

@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { ChevronsUpDown, Gauge, LogOut, type LucideIcon, Shield, User, Users } from "lucide-react";
+import { Link } from "@/components/link";
 import {
   DropdownMenu,
   DropdownMenuContent,

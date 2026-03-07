@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PER_PAGE } from "@/constants/application";
+import { useNavigationRouter } from "@/hooks/use-navigation-router";
 import dayjs from "@/lib/utils/date";
 import { AccountSearch } from "./account-search";
 import { deleteAccountAction } from "./actions";
@@ -48,6 +49,7 @@ const getStatusBadgeVariant = (status: string): "default" | "secondary" | "destr
 
 export const AccountList = ({ data, total, page, query, sort, currentUserId }: Props) => {
   const router = useRouter();
+  const { push } = useNavigationRouter();
   const [deleteTarget, setDeleteTarget] = useState<AccountSummary | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -56,7 +58,7 @@ export const AccountList = ({ data, total, page, query, sort, currentUserId }: P
     params.set("page", String(newPage + 1));
     if (query) params.set("query", query);
     if (sort) params.set("sort", sort);
-    router.push(`/system/accounts?${params.toString()}`);
+    push(`/system/accounts?${params.toString()}`);
   };
 
   const handleDelete = async () => {

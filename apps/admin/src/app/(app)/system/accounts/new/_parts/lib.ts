@@ -15,6 +15,7 @@ export const createAccountSchema = z
     confirmPassword: passwordSchema,
     name: accountNameSchema,
     privilege: accountPrivilegeSchema,
+    sendInvite: z.boolean(),
   })
   .refine(passwordMatchRefine.check, passwordMatchRefine.params);
 
