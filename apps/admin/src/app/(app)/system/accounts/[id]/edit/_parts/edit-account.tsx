@@ -20,7 +20,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useNavigationRouter } from "@/hooks/use-navigation-progress";
+import { useNavigationRouter } from "@/hooks/use-navigation-router";
 import { deleteAccountAction, updateAccountAction } from "./actions";
 import { type EditAccountInput, editAccountSchema } from "./lib";
 

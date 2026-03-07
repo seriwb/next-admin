@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { NavigationProgressProvider } from "@/hooks/use-navigation-progress";
+import { NavigationProgressProvider } from "@/hooks/use-navigation-router";
 import { Breadcrumb } from "./breadcrumb";
 import type { Navigation } from "./navigation";
 import { ProtectedView } from "./protected-view";

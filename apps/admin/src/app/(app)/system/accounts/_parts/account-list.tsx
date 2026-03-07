@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PER_PAGE } from "@/constants/application";
-import { useNavigationRouter } from "@/hooks/use-navigation-progress";
+import { useNavigationRouter } from "@/hooks/use-navigation-router";
 import dayjs from "@/lib/utils/date";
 import { AccountSearch } from "./account-search";
 import { deleteAccountAction } from "./actions";

@@ -7,10 +7,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useNavigationRouter } from "@/hooks/use-navigation-progress";
+import { useNavigationRouter } from "@/hooks/use-navigation-router";
 import { createAccountAction } from "./actions";
 import { type CreateAccountInput, createAccountSchema } from "./lib";
 
@@ -27,6 +28,7 @@ export const CreateAccount = () => {
       confirmPassword: "",
       name: "",
       privilege: "Normal",
+      sendInvite: false,
     },
   });
   const { isSubmitting } = form.formState;
@@ -142,6 +144,21 @@ export const CreateAccount = () => {
                       <SelectItem value="Owner">Owner</SelectItem>
                     </SelectContent>
                   </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="sendInvite"
+              render={({ field }) => (
+                <FormItem className="flex items-center gap-2">
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} id="sendInvite" />
+                  </FormControl>
+                  <FormLabel htmlFor="sendInvite" className="cursor-pointer">
+                    招待メールを送信する
+                  </FormLabel>
                   <FormMessage />
                 </FormItem>
               )}

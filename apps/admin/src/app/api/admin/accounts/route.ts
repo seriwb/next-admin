@@ -1,7 +1,10 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { PER_PAGE } from "@/constants/application";
+import { render } from "@react-email/render";
+import { APP_NAME, PER_PAGE } from "@/constants/application";
 import { auth } from "@/lib/auth";
+import { sendMail } from "@/lib/mail";
+import { InviteEmail } from "@/lib/mail/templates/invite-email";
 import prisma from "@/lib/prisma";
 import type { ServerResult } from "@/types/app";
 
@@ -69,6 +72,7 @@ export async function POST(request: NextRequest) {
       password: string;
       name?: string;
       privilege: string;
+      sendInvite?: boolean;
     };
 
     await auth.api.signUpEmail({
@@ -79,6 +83,24 @@ export async function POST(request: NextRequest) {
         privilege: body.privilege,
       },
     });
+
+    // 招待メール送信（失敗してもアカウント作成はブロックしない）
+    if (body.sendInvite) {
+      try {
+        const loginUrl = `${process.env.NEXT_PUBLIC_HOST}/signin`;
+        const html = await render(
+          InviteEmail({
+            name: body.name || "",
+            email: body.email,
+            password: body.password,
+            loginUrl,
+          })
+        );
+        await sendMail(body.email, `[${APP_NAME}] アカウントが作成されました`, html);
+      } catch (mailError) {
+        console.error("招待メール送信エラー:", mailError);
+      }
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

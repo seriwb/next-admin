@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useNavigationRouter } from "@/hooks/use-navigation-progress";
+import { useNavigationRouter } from "@/hooks/use-navigation-router";
 
 type Props = {
   query: string;
