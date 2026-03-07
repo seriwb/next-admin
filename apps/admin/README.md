@@ -1,12 +1,12 @@
 # Admin
 
-管理画面アプリケーション（Next.js 16 / App Router）
+Next.jsを使用した管理画面アプリケーション
 
 ## セットアップ手順
 
 ### 1. インフラの起動
 
-プロジェクトルートで Docker コンテナを起動する。
+プロジェクトルートでDockerコンテナを起動する。
 
 ```bash
 docker compose up -d
@@ -14,7 +14,7 @@ docker compose up -d
 
 ### 2. Node.js のインストール
 
-`.node-version` に記載のバージョンを使用する。
+`.node-version`に記載のバージョンを使用する。
 
 ```bash
 cat .node-version | nodenv install
@@ -70,3 +70,13 @@ yarn dev
 ブラウザで以下にアクセスし、最初の管理者アカウントを作成する。
 
 - http://localhost:3500/firstuser
+
+
+## 開発用Tips
+
+### メールの受信確認
+
+ローカル環境で送信したメールは、実際のアドレスには送信されません。  
+内容は以下のURLで確認することができます。
+
+- http://localhost:58005/

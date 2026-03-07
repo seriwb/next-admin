@@ -1,36 +1,32 @@
 # next-admin
 
-Next.js 16 (App Router) を使用した管理画面アプリケーションテンプレート。Yarn Workspaces によるモノレポ構成。
+Next.jsを使用した管理画面アプリケーションのテンプレートプロジェクトで、  
+Yarn Workspacesによるモノレポ構成になっています。
 
-## 技術スタック
+## Base Libraries
 
-| カテゴリ             | 技術                                  |
-| -------------------- | ------------------------------------- |
-| フレームワーク       | Next.js 16 (App Router)               |
-| 認証                 | Better Auth 1.4                       |
-| データベース         | PostgreSQL 18 / Prisma 7              |
-| UI                   | Tailwind CSS 4 / shadcn/ui / Radix UI |
-| フォーム             | React Hook Form + Zod                 |
-| メール               | AWS SES / React Email                 |
-| パッケージマネージャ | Yarn 4                                |
+- Next.js 16
+- Better Auth 1.4
+- TailwindCSS 7
+- prisma 4
+- yarn 4
+
+### Infrastructures
+
+- docker compose
+- PostgreSQL 18
+- oven(SES)
+
 
 ## リポジトリ構成
 
 ```
 next-admin/
 ├── apps/
-│   └── admin/              # 管理画面アプリケーション (Next.js)
+│   ├── admin/          # 管理画面アプリケーション (Next.js)
+│   └── web/            # サービスアプリケーション用フレイスホルダー
 ├── packages/
-│   └── db/                 # データベースパッケージ (Prisma)
-├── infra/                  # インフラ設定 (PostgreSQL初期化SQLなど)
-├── docker-containers/      # Docker関連設定
-├── docker-compose.yml      # ローカル開発用インフラ (PostgreSQL, SES)
-└── docs/                   # ドキュメント
+│   └── db/             # マイグレーション管理 (Prisma)
+├── infra/              # インフラ設定
+└── docker-compose.yml  # ローカル開発用インフラ管理
 ```
-
-## インフラ構成 (docker-compose)
-
-| サービス      | ポート | 用途                                         |
-| ------------- | ------ | -------------------------------------------- |
-| PostgreSQL 18 | 55432  | データベース (user: admin / password: admin) |
-| SES Local     | 58005  | メール送信エミュレーション                   |

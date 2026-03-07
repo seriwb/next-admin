@@ -1,6 +1,6 @@
 # DB
 
-データベース管理パッケージ (`@next-admin/db`)。Prisma 7 を使用。
+データベース管理パッケージ (`@next-admin/db`)
 
 ## セットアップ手順
 
@@ -11,17 +11,6 @@
 ```bash
 cp .env.template .env
 ```
-
-主な設定項目:
-
-| 変数                | デフォルト値     | 説明             |
-| ------------------- | ---------------- | ---------------- |
-| `DATABASE_HOST`     | `localhost`      | DBホスト         |
-| `DATABASE_PORT`     | `55432`          | DBポート         |
-| `DATABASE_USERNAME` | `admin`          | DBユーザー       |
-| `DATABASE_PASSWORD` | `admin`          | DBパスワード     |
-| `DATABASE_NAME`     | `next_admin`     | DB名             |
-| `DATABASE_URL`      | （上記から構成） | Prisma接続文字列 |
 
 ### 2. Prisma クライアント生成
 
