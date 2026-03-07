@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useNavigationRouter } from "@/hooks/use-navigation-progress";
 
 type Props = {
   query: string;
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const AccountSearch = ({ query, sort }: Props) => {
-  const router = useRouter();
+  const { push } = useNavigationRouter();
   const [searchValue, setSearchValue] = useState(query);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -20,7 +20,7 @@ export const AccountSearch = ({ query, sort }: Props) => {
     params.set("page", "1");
     if (value) params.set("query", value);
     if (newSort) params.set("sort", newSort);
-    router.push(`/system/accounts?${params.toString()}`);
+    push(`/system/accounts?${params.toString()}`);
   };
 
   const handleSearchChange = (value: string) => {

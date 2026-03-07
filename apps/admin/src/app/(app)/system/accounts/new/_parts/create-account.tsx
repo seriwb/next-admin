@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -11,11 +10,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useNavigationRouter } from "@/hooks/use-navigation-progress";
 import { createAccountAction } from "./actions";
 import { type CreateAccountInput, createAccountSchema } from "./lib";
 
 export const CreateAccount = () => {
-  const router = useRouter();
+  const { push, back } = useNavigationRouter();
   const [errorMessage, setErrorMessage] = useState("");
 
   const form = useForm<CreateAccountInput>({
@@ -37,7 +37,7 @@ export const CreateAccount = () => {
       const result = await createAccountAction(data);
       if (result.success) {
         toast.success("アカウントを作成しました");
-        router.push("/system/accounts");
+        push("/system/accounts");
       } else {
         setErrorMessage(result.error || "");
         if (result.fieldErrors) {
@@ -148,7 +148,7 @@ export const CreateAccount = () => {
             />
             {errorMessage && <p className="text-sm font-medium text-destructive">{errorMessage}</p>}
             <div className="flex gap-2">
-              <Button type="button" variant="outline" onClick={() => router.back()} disabled={isSubmitting}>
+              <Button type="button" variant="outline" onClick={() => back()} disabled={isSubmitting}>
                 キャンセル
               </Button>
               <Button type="submit" disabled={isSubmitting}>
